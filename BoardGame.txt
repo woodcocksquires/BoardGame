@@ -1,0 +1,30 @@
+C++ Board Game Engine
+
+1. Board made up of squares of a defined size in a rectangular shape
+2. Board squares will have a state, frequently a colour, which can be defined in a particular pattern, frequently chequered
+3. Board squares will have a single digit state identifier and also a state value (i.e. hex colour code)
+4. Board square state may affect piece move rules
+5. A board square will be empty or contain a single player's piece
+6. Piece types may be defined and may move to their own rules
+7. Piece types can define if they can be taken
+8. Piece types can define rules to be tested after each move
+9. Piece types can define rules to be tested prior to a move being validated
+10. Piece types will have a single digit identifier, a short name (made up of colour and identifier), and a long name
+11. Piece types will have a relative value
+12. A player will have a colour different from other players
+13. Colours may be defined and will have a single digit identifier, and a long name
+14. Game may contain two or more players
+15. Game type may define the maximum and minimum number of players
+16. A player may move a single piece in any one go
+17. Players get to move in a round-robin order
+18. Board squares are labelled letters beginning from A horizontally and numbers beginning from 1 vertically
+19. Move notation may be defined and will be used by the game to register a move
+20. Game will be state based and will wait for an external method call for a move to be made, it will not force a game loop (an external consumer will need to do this)
+21. Game will keep track of all registered moves by all players, according to the notation definition
+22. A renderer must be able to render a board without knowledge of the game, simply using board state information
+23. An external client must be able obtain moves without the game knowing how the moves were obtained and without the render needing knowledge of the game
+24. Game must be able to validate moves and return values to the client to allow feedback to user
+25. Game must not care where, when or how moves are made - this should allow for a game to be played over a network, on the same client and on different types of client
+26. Game must define if a game ends after a set time, set number of moves (each), when a single player can make no further moves, or when any one player can make no further moves
+27. Game must be able to define game level state and variables
+28. Game must be able to define rules to be tested after each move which can affect game state (i.e. material draw in Chess)
