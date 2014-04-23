@@ -13,7 +13,7 @@ C++ Board Game Engine
 11. Piece types will have a relative value
 12. A player will have a colour different from other players
 13. Colours may be defined and will have a single digit identifier, and a long name
-14. Game may contain two or more players
+14. Game may contain one or more players
 15. Game type may define the maximum and minimum number of players
 16. A player may move a single piece in any one go
 17. Players get to move in a round-robin order
@@ -31,3 +31,6 @@ C++ Board Game Engine
 29. Game must be able to initialise new board
 30. Player must be able to resign from game
 31. Player must be able to offer other player(s) a draw
+32. Squares must be able to hold a value and a name
+33. Game may define dice rolls for the start of each move, the number of dice, and the number of sides on each dice
+34. If dice defined, game will assign random dice values at the start of each move, these values will be made available to pieces when making moves
