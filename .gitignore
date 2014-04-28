@@ -1,18 +1,26 @@
+######
+##Custom
+######
+
+*.dll
+*.o
+*.exe
+
+
 #################
 ## Eclipse
 #################
 
 *.pydevproject
-.project
-.metadata
-bin/
+*.project
+*.metadata
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.classpath
+classpath
 .settings/
 .loadpath
 
@@ -43,11 +51,9 @@ local.properties
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
 x64/
 build/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
 
 # MSTest test Results

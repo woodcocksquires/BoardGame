@@ -8,17 +8,17 @@
 #include <Game.h>
 
 namespace Wsq {
-namespace BoardGame {
+	namespace BoardGame {
 
-Game::Game() {
-	// TODO Auto-generated constructor stub
+	Game::Game() {
+		// TODO Auto-generated constructor stub
 
-}
+	}
 
 
-string Game::Test(){
-	return "Test this!";
-}
+	string Game::Test(){
+		return "Test this!";
+	}
 
-} /* namespace BoardGame */
+	} /* namespace BoardGame */
 } /* namespace Wsq */

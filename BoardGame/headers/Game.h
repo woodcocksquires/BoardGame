@@ -12,16 +12,16 @@
 using namespace std;
 
 namespace Wsq {
-namespace BoardGame {
+	namespace BoardGame {
 
-class Game {
-public:
-	Game();
+		class Game {
+		  public:
+			Game();
 
-	string Test();
-};
+			string Test();
+		};
 
-} /* namespace BoardGame */
+	} /* namespace BoardGame */
 } /* namespace Wsq */
 
 #endif /* GAME_H_ */

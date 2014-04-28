@@ -6,13 +6,18 @@
  */
 
 #include <iostream>
-#include <Game.h>
+#include <IBoardGame.h>
+#include <BoardGame.h>
 
 using namespace std;
 using namespace Wsq::BoardGame;
 
 int main(){
-	cout << "Hell yeah";
-	Game g = Game();
-	cout << g.Test() << endl;
+	string test;
+	cout << "\nstarted\n";
+	BoardGame bg = BoardGame();
+	cout << endl;
+	cin >> test;
+
+
 }
