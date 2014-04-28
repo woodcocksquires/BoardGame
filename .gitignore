@@ -12,7 +12,7 @@
 #################
 
 *.pydevproject
-*.project
+#*.project
 *.metadata
 tmp/
 *.tmp
@@ -31,7 +31,7 @@ classpath
 *.launch
 
 # CDT-specific
-.cproject
+#.cproject
 
 # PDT-specific
 .buildpath
