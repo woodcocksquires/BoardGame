@@ -12,8 +12,9 @@
 using namespace std;
 using namespace Wsq::BoardGame;
 
-int main(){
+int main(int argc, char * argv[]){
 	string test;
+
 	cout << "\nstarted\n";
 	BoardGame bg = BoardGame();
 	cout << endl;
