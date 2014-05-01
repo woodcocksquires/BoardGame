@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 
 using namespace Wsq::FileSystem;
+using namespace std;
 
 vector<string> * FileSystemUtility::GetFilesInDirectory(string directory){
 	vector<string> * list = new vector<string>();
@@ -20,19 +21,11 @@ vector<string> * FileSystemUtility::GetFilesInDirectory(string directory){
 	if(dir != NULL){
 		ent = readdir(dir);
 		while(ent != NULL){
-			list->push_back(ent->d_name);
-			const char * c = (directory + string("\\") + string(ent->d_name)).c_str();
-			struct stat * s = NULL;
-			stat(c, s);
-			if(s == NULL){
-				cout << "\noops";
+			string name = string(ent->d_name);
+			if(name.substr(name.find_last_of(".") + 1) == "lua"){
+				list->push_back(directory + "\\" + name);
 			}
-			else{
-				cout << "\n" << s->st_mode;
-			}
-			//cout << "\n" << ent->d_ino;
 			ent = readdir(dir);
-
 		}
 		closedir(dir);
 	}

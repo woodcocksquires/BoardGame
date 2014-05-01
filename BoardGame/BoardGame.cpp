@@ -4,9 +4,11 @@
 #include <stdexcept>
 #include <iostream>
 #include <FileSystemUtility.h>
+#include <LuaUtility.h>
 
 using namespace std;
 using namespace Wsq::BoardGame;
+using namespace Wsq::Lua;
 
 BoardGame::BoardGame(){
 	_gameList = LoadGameList();
@@ -25,23 +27,19 @@ vector<IGameDetail *> * BoardGame::GetGameList(){
 }
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
-	cout << "\nhere goes\n";
+
 	vector<string> * files = Wsq::FileSystem::FileSystemUtility::GetFilesInDirectory("scripts\\games");
 
 	for(int f = 0; f < (int)files->size(); f++){
 		cout << "\n" << files->at(f);
 	}
 
-	/*lua_State * L = luaL_newstate();
-	luaL_openlibs(L);
-
-
-
-	if(luaL_loadfile(L, "scripts\\games.lua") || lua_pcall(L, 0, 0 ,0)){
-		throw runtime_error("Cannot load games list.");
+	lua_State * L = LuaUtility::GetNewState();
+	for(int f = 0; f < (int)files->size(); f++){
+		LuaUtility::LoadAndExecuteFile(L, files->at(f), string(""));
 	}
 
-	lua_close(L);*/
+	LuaUtility::CloseState(L);
 
 	return 0;
 }

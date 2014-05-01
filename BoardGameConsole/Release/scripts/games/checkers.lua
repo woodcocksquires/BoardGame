@@ -1,1 +1,1 @@
-print("\nLoaded Checkers\n")
+print("Loaded Checkers")

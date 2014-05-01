@@ -1,1 +1,1 @@
-print("\nLoaded Chess\n")
+print("Loaded Chess")
