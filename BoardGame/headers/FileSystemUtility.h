@@ -10,7 +10,7 @@ namespace Wsq {
 	namespace FileSystem {
 		class FileSystemUtility {
 		  public:
-			static vector<string> * GetFilesInDirectory(string directory);
+			static vector<string> * GetFilesInDirectory(string directory, string extension);
 		};
 	}
 }

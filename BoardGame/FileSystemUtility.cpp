@@ -13,7 +13,7 @@
 using namespace Wsq::FileSystem;
 using namespace std;
 
-vector<string> * FileSystemUtility::GetFilesInDirectory(string directory){
+vector<string> * FileSystemUtility::GetFilesInDirectory(string directory, string extension){
 	vector<string> * list = new vector<string>();
 	DIR * dir;
 	struct dirent * ent;
@@ -22,7 +22,7 @@ vector<string> * FileSystemUtility::GetFilesInDirectory(string directory){
 		ent = readdir(dir);
 		while(ent != NULL){
 			string name = string(ent->d_name);
-			if(name.substr(name.find_last_of(".") + 1) == "lua"){
+			if(name.substr(name.find_last_of(".") + 1) == extension){
 				list->push_back(directory + "\\" + name);
 			}
 			ent = readdir(dir);

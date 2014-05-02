@@ -14,6 +14,15 @@ using namespace std;
 lua_State * LuaUtility::GetNewState(){
 	lua_State * L = luaL_newstate();
 	luaL_openlibs(L);
+
+	lua_getglobal(L, "Wsq");
+	if(lua_isnil(L, -1)){
+		lua_pop(L, -1);
+		lua_newtable(L);
+		lua_setglobal(L, "Wsq");
+	}
+	lua_newtable(L);
+	lua_setfield(L, -2, "BoardGame");
 	return L;
 }
 

@@ -28,7 +28,7 @@ vector<IGameDetail *> * BoardGame::GetGameList(){
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
 
-	vector<string> * files = Wsq::FileSystem::FileSystemUtility::GetFilesInDirectory("scripts\\games");
+	vector<string> * files = Wsq::FileSystem::FileSystemUtility::GetFilesInDirectory("scripts\\games", "lua");
 
 	for(int f = 0; f < (int)files->size(); f++){
 		cout << "\n" << files->at(f);
