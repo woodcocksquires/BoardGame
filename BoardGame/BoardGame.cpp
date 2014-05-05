@@ -11,6 +11,8 @@ using namespace Wsq::BoardGame;
 using namespace Wsq::Lua;
 
 BoardGame::BoardGame(){
+	_luaState = LuaUtility::GetNewState();
+
 	_gameList = LoadGameList();
 }
 
@@ -20,6 +22,7 @@ BoardGame::~BoardGame(){
 	}
 
 	delete _gameList;
+	LuaUtility::CloseState(_luaState);
 }
 
 vector<IGameDetail *> * BoardGame::GetGameList(){
@@ -34,12 +37,10 @@ vector<IGameDetail *> * BoardGame::LoadGameList(){
 		cout << "\n" << files->at(f);
 	}
 
-	lua_State * L = LuaUtility::GetNewState();
+	lua_State * L = _luaState;
 	for(int f = 0; f < (int)files->size(); f++){
 		LuaUtility::LoadAndExecuteFile(L, files->at(f), string(""));
 	}
-
-	LuaUtility::CloseState(L);
 
 	return 0;
 }

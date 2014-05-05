@@ -6,7 +6,6 @@
  */
 
 #include <iostream>
-#include <IBoardGame.h>
 #include <BoardGame.h>
 
 using namespace std;

@@ -2,11 +2,13 @@
 #define BOARDGAME_H_
 
 #include <IBoardGame.h>
+#include <lua.h>
 
 namespace Wsq {
 	namespace BoardGame {
 		class BoardGame : public IBoardGame {
 		  private:
+			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
 			vector<IGameDetail *> * LoadGameList();
 		  public:
