@@ -8,29 +8,53 @@ using namespace std;
 
 namespace Wsq {
 	namespace Lua {
-		struct EmptyTable {};
+		struct EmptyTable {
+			operator double(){
+				return 0.0;
+			}
+			operator int(){
+				return 0;
+			}
+			operator bool(){
+				return false;
+			}
+			operator char*(){
+				return "";
+			}
+			operator string(){
+				return string();
+			}
+		};
+
+		template<typename A, typename B>
+		struct isSame { static const bool value = false; };
+		template<typename A>
+		struct isSame<A, A> { static const bool value = true; };
+
 
 		class LuaUtility {
 		  private:
-			template <class T>
-			static void _pushValue(lua_State * L, T * value){
-				if(dynamic_cast<bool>(value)){
-					lua_pushboolean(L, value);
+			template<typename A, typename B>
+			static bool _isSame(A a, B b) { return isSame<A, B>::value; };
+			template <typename T>
+			static void _pushValue(lua_State * L, T value){
+				if(_isSame(value, true)){
+					lua_pushboolean(L, true);
 				}
-				else if(dynamic_cast<int>(value)){
-					lua_pushinteger(L, value);
+				else if(_isSame(value, 1)){
+					lua_pushinteger(L, (lua_Integer)1);
 				}
-				else if(dynamic_cast<double>(value)){
-					lua_pushnumber(L, value);
+				else if(_isSame(value, 1.0)){
+					lua_pushnumber(L, (double)value);
 				}
-				else if(dynamic_cast<string *>(value)){
-					lua_pushstring(L, dynamic_cast<string>(value).c_str());
+				else if(_isSame(value, EmptyTable())){
+					lua_newtable(L);
 				}
-				else if(dynamic_cast<char *>(value)){
+				else if(_isSame(value, "")){
 					lua_pushstring(L, value);
 				}
-				else if(dynamic_cast<EmptyTable>(value)){
-					lua_newtable(L);
+				else if(_isSame(value, string())){
+					lua_pushstring(L, ((string)*value).c_str());
 				}
 			}
 		  public:
@@ -41,13 +65,13 @@ namespace Wsq {
 			static bool FieldExists(lua_State * L, string name);
 
 			template <class T>
-			static void SetGlobal(lua_State * L, string name, T * value) {
+			static void SetGlobal(lua_State * L, string name, T value) {
 				_pushValue(L, value);
 				lua_setglobal(L, name.c_str());
 			};
 
 			template <class T>
-			static void SetField(lua_State * L, string name, T * value) {
+			static void SetField(lua_State * L, string name, T value) {
 				_pushValue(L, value);
 				lua_setfield(L, -1, name.c_str());
 			};
