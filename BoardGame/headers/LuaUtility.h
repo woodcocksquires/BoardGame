@@ -2,7 +2,10 @@
 #define LUAUTILITY_H_
 
 #include <string>
+#include <stream>
 #include <lua.hpp>
+#include <typeinfo>
+#include <cfloat>
 
 using namespace std;
 
@@ -10,19 +13,16 @@ namespace Wsq {
 	namespace Lua {
 		struct EmptyTable {
 			operator double(){
-				return 0.0;
+				return -1.0;
 			}
 			operator int(){
-				return 0;
+				return -1;
 			}
 			operator bool(){
 				return false;
 			}
 			operator char*(){
-				return "";
-			}
-			operator string(){
-				return string();
+				return nullptr;
 			}
 		};
 
@@ -34,29 +34,56 @@ namespace Wsq {
 
 		class LuaUtility {
 		  private:
+			template <typename T>
+			static double _toDouble(T value){
+				ostringstream ss;
+				ss << value;
+				string str = ss.str();
+
+				bool period = false;
+				int factor = 1;
+				double output = 0;
+				for(int c=str.length(); c>=0; c--){
+					if(isdigit(str[c])){
+						output += factor*(((int)c)+48);
+						factor *= 10;
+						continue;
+					}
+					if(period){
+						return DBL_MIN;
+					}
+					if(str[c] == '.'){
+						output /= (factor^2);
+						factor = 1;
+						continue;
+					}
+				}
+
+				return output;
+			}
+
 			template<typename A, typename B>
 			static bool _isSame(A a, B b) { return isSame<A, B>::value; };
 			template <typename T>
 			static void _pushValue(lua_State * L, T value){
-				if(_isSame(value, true)){
-					lua_pushboolean(L, true);
+				if(typeid(value) == typeid(true)){
+					lua_pushboolean(L, (bool)value);
 				}
-				else if(_isSame(value, 1)){
-					lua_pushinteger(L, (lua_Integer)1);
+				else if(typeid(value) == typeid(1)){
+					lua_pushinteger(L, (lua_Integer)value);
 				}
-				else if(_isSame(value, 1.0)){
-					lua_pushnumber(L, (double)value);
+				else if(typeid(value) == typeid(1.0)){
+					lua_pushnumber(L, _toDouble(value));
 				}
 				else if(_isSame(value, EmptyTable())){
 					lua_newtable(L);
 				}
 				else if(_isSame(value, "")){
-					lua_pushstring(L, value);
-				}
-				else if(_isSame(value, string())){
-					lua_pushstring(L, ((string)*value).c_str());
+					lua_pushstring(L, (char *)value);
 				}
 			}
+
+
 		  public:
 			static lua_State * GetNewState();
 			static int LoadAndExecuteFile(lua_State * L, string path, string table);

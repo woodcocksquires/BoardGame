@@ -16,12 +16,21 @@ lua_State * LuaUtility::GetNewState(){
 	lua_State * L = luaL_newstate();
 	luaL_openlibs(L);
 	if(!GlobalExists(L, "Wsq")){
-		SetGlobal(L, string("Wsq"), EmptyTable());
+		SetGlobal(L, "Wsq", EmptyTable());
 	}
 	lua_getglobal(L, "Wsq");
 	if(FieldExists(L, "BoardGame")){
-		SetField(L, string("BoardGame"), EmptyTable());
+		SetField(L, "BoardGame", EmptyTable());
 	}
+	lua_getfield(L, -1, "BoardGame");
+	SetField(L, "Version", 4);
+	lua_getfield(L, -1, "Version");
+	lua_Number version = lua_tonumber(L, -1);
+	lua_pop(L, -1);
+	lua_pop(L, -1);
+	lua_pop(L, -1);
+	lua_pop(L, -1);
+	cout << "Version: " << version << "\n";
 	return L;
 }
 
