@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 
+
 using namespace Wsq::Lua;
 using namespace std;
 
@@ -22,15 +23,14 @@ lua_State * LuaUtility::GetNewState(){
 	if(FieldExists(L, "BoardGame")){
 		SetField(L, "BoardGame", EmptyTable());
 	}
-	lua_getfield(L, -1, "BoardGame");
+	/*lua_getfield(L, -1, "BoardGame");
 	SetField(L, "Version", 4);
-	lua_getfield(L, -1, "Version");
+	/*lua_getfield(L, -1, "Version");
 	lua_Number version = lua_tonumber(L, -1);
 	lua_pop(L, -1);
 	lua_pop(L, -1);
 	lua_pop(L, -1);
-	lua_pop(L, -1);
-	cout << "Version: " << version << "\n";
+	cout << "Version: " << version << "\n";*/
 	return L;
 }
 
@@ -64,6 +64,56 @@ bool LuaUtility::FieldExists(lua_State * L, string name){
 		return true;
 	}
 	return false;
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, bool value){
+	lua_pushboolean(L, value);
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, double value){
+	lua_pushnumber(L, value);
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, char * value){
+	lua_pushstring(L, value);
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, EmptyTable value){
+	lua_newtable(L);
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, int value){
+	lua_pushinteger(L, lua_Integer(value));
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaUtility::SetField(lua_State * L, string name, bool value){
+	lua_pushboolean(L, value);
+	lua_setfield(L, -1, name.c_str());
+}
+
+void LuaUtility::SetField(lua_State * L, string name, double value){
+	lua_pushnumber(L, value);
+	lua_setfield(L, -1, name.c_str());
+}
+
+void LuaUtility::SetField(lua_State * L, string name, char * value){
+	lua_pushstring(L, value);
+	lua_setfield(L, -1, name.c_str());
+}
+
+void LuaUtility::SetField(lua_State * L, string name, EmptyTable value){
+	lua_newtable(L);
+	lua_setfield(L, -1, name.c_str());
+}
+
+void LuaUtility::SetField(lua_State * L, string name, int value){
+	lua_pushinteger(L, lua_Integer(value));
+	lua_setfield(L, -1, name.c_str());
 }
 
 
