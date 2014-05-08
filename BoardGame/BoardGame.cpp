@@ -9,10 +9,19 @@
 using namespace std;
 using namespace Wsq::BoardGame;
 using namespace Wsq::Lua;
+using namespace Wsq::FileSystem;
 
 BoardGame::BoardGame(){
 	_luaState = LuaUtility::GetNewState();
-
+	if(!LuaUtility::GlobalExists(_luaState, "Wsq")){
+		LuaUtility::SetGlobal(_luaState, "Wsq", EmptyTable());
+	}
+	lua_getglobal(_luaState, "Wsq");
+	if(!LuaUtility::FieldExists(_luaState, "BoardGame")){
+		LuaUtility::SetField(_luaState, "BoardGame", EmptyTable());
+	}
+	lua_pop(_luaState, 1);
+	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(_scriptPath, "config.lua"));
 	_gameList = LoadGameList();
 }
 
@@ -39,7 +48,7 @@ vector<IGameDetail *> * BoardGame::LoadGameList(){
 
 	lua_State * L = _luaState;
 	for(int f = 0; f < (int)files->size(); f++){
-		LuaUtility::LoadAndExecuteFile(L, files->at(f), string(""));
+		LuaUtility::LoadAndExecuteFile(L, files->at(f));
 	}
 
 	return 0;

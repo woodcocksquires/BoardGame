@@ -19,5 +19,5 @@ int main(int argc, char * argv[]){
 	cout << endl;
 	cin >> test;
 
-
+	return 0;
 }

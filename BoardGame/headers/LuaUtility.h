@@ -12,7 +12,7 @@ namespace Wsq {
 		class LuaUtility {
 		  public:
 			static lua_State * GetNewState();
-			static int LoadAndExecuteFile(lua_State * L, string path, string table);
+			static int LoadAndExecuteFile(lua_State * L, string path);
 			static void CloseState(lua_State * L);
 			static bool GlobalExists(lua_State * L, string name);
 			static bool FieldExists(lua_State * L, string name);

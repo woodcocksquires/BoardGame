@@ -11,6 +11,7 @@ namespace Wsq {
 		class FileSystemUtility {
 		  public:
 			static vector<string> * GetFilesInDirectory(string directory, string extension);
+			static string CombinePath(string path, string append);
 		};
 	}
 }

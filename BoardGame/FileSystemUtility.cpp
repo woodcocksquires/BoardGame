@@ -32,6 +32,25 @@ vector<string> * FileSystemUtility::GetFilesInDirectory(string directory, string
 	return list;
 }
 
+string FileSystemUtility::CombinePath(string path, string append){
+	if(path.empty() || append.empty()){
+		//throw bad_exception;
+	}
+	string output = path;
+	if(output.find_last_of('\\') != output.length()-1){
+		output.push_back('\\');
+	}
+
+	if(append.find_last_of('\\') == append.length()-1){
+		output += append.substr(0, (int)append.length() -1);
+	}
+	else{
+		output += append;
+	}
+
+	return output;
+}
+
 
 
 
