@@ -1,14 +1,14 @@
-#include <BoardGame.h>
 #include <IGameDetail.h>
 #include <lua.hpp>
+#include <LuaUtility.h>
+#include <BoardGame.h>
 #include <stdexcept>
 #include <iostream>
 #include <FileSystemUtility.h>
-#include <LuaUtility.h>
 
 using namespace std;
-using namespace Wsq::BoardGame;
 using namespace Wsq::Lua;
+using namespace Wsq::BoardGame;
 using namespace Wsq::FileSystem;
 
 BoardGame::BoardGame(){
@@ -20,8 +20,11 @@ BoardGame::BoardGame(){
 	if(!LuaUtility::FieldExists(_luaState, "BoardGame")){
 		LuaUtility::SetField(_luaState, "BoardGame", EmptyTable());
 	}
-	lua_pop(_luaState, 1);
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(_scriptPath, "config.lua"));
+	lua_getfield(_luaState, -1, "BoardGame");
+	lua_getfield(_luaState, -1, "Config");
+	lua_getfield(_luaState, -1, "GamePath");
+	_gamePath = lua_tostring(_luaState, -1);
 	_gameList = LoadGameList();
 }
 
@@ -40,7 +43,7 @@ vector<IGameDetail *> * BoardGame::GetGameList(){
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
 
-	vector<string> * files = Wsq::FileSystem::FileSystemUtility::GetFilesInDirectory("scripts\\games", "lua");
+	vector<string> * files = Wsq::FileSystem::FileSystemUtility::GetFilesInDirectory(FileSystemUtility::CombinePath(_scriptPath, _gamePath), "lua");
 
 	for(int f = 0; f < (int)files->size(); f++){
 		cout << "\n" << files->at(f);

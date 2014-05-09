@@ -9,7 +9,7 @@ namespace Wsq {
 		class BoardGame : public IBoardGame {
 		  private:
 			const char * _scriptPath = "scripts";
-			char * _gamePath;
+			const char * _gamePath;
 			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
 			vector<IGameDetail *> * LoadGameList();

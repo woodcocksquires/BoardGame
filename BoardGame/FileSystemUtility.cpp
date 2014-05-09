@@ -32,16 +32,21 @@ vector<string> * FileSystemUtility::GetFilesInDirectory(string directory, string
 	return list;
 }
 
+
 string FileSystemUtility::CombinePath(string path, string append){
+	return CombinePath(path, append, '\\');
+}
+
+string FileSystemUtility::CombinePath(string path, string append, char separator){
 	if(path.empty() || append.empty()){
 		//throw bad_exception;
 	}
 	string output = path;
-	if(output.find_last_of('\\') != output.length()-1){
-		output.push_back('\\');
+	if(output.find_last_of(separator) != output.length()-1){
+		output.push_back(separator);
 	}
 
-	if(append.find_last_of('\\') == append.length()-1){
+	if(append.find_last_of(separator) == append.length()-1){
 		output += append.substr(0, (int)append.length() -1);
 	}
 	else{

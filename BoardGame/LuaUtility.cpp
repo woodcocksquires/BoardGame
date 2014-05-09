@@ -101,4 +101,29 @@ void LuaUtility::SetField(lua_State * L, string name, int value){
 	lua_setfield(L, -2, name.c_str());
 }
 
+bool LuaUtility::GetFieldValue(lua_State * L, string name){
+
+}
+
+int LuaUtility::GetFieldValue(lua_State * L, string name){
+
+}
+
+double LuaUtility::GetFieldValue(lua_State * L, string name){
+
+}
+
+char * LuaUtility::GetFieldValue(lua_State * L, string name){
+
+}
+
+string LuaUtility::GetFieldValue(lua_State * L, string name){
+
+}
+
+void LuaUtility::GetTable(lua_State * L, string name){
+
+}
+
+
 

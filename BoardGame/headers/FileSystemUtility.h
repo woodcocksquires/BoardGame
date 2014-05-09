@@ -12,6 +12,7 @@ namespace Wsq {
 		  public:
 			static vector<string> * GetFilesInDirectory(string directory, string extension);
 			static string CombinePath(string path, string append);
+			static string CombinePath(string path, string append, char separator);
 		};
 	}
 }
