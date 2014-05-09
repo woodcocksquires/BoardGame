@@ -11,7 +11,8 @@ namespace Wsq {
 		struct EmptyTable {};
 		class LuaUtility {
 		private:
-			static void GetTable(lua_State * L, string name);
+			static bool GetTable(lua_State * L, string name);
+			static int GetTablePath(lua_State * L, string path);
 		  public:
 			static lua_State * GetNewState();
 			static int LoadAndExecuteFile(lua_State * L, string path);

@@ -121,7 +121,19 @@ string LuaUtility::GetFieldValue(lua_State * L, string name){
 
 }
 
-void LuaUtility::GetTable(lua_State * L, string name){
+bool LuaUtility::GetTable(lua_State * L, string name){
+	if(lua_istable(L, -1)){
+		lua_getfield(L, -1, name.c_str());
+		if(!lua_istable(L, -1)){
+			lua_pop(L, 1);
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+int LuaUtility::GetTablePath(lua_State * L, string path){
 
 }
 
