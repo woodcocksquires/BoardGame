@@ -31,11 +31,10 @@ namespace Wsq {
 			static void SetField(lua_State * L, string name, char * value);
 			static void SetField(lua_State * L, string name, string value);
 			static void SetField(lua_State * L, string name, EmptyTable value);
-			static bool GetFieldValue(lua_State * L, string name);
-			static int GetFieldValue(lua_State * L, string name);
-			static double GetFieldValue(lua_State * L, string name);
-			static char * GetFieldValue(lua_State * L, string name);
-			static string GetFieldValue(lua_State * L, string name);
+			static bool FieldToBool(lua_State * L, string name);
+			static int FieldToInt(lua_State * L, string name);
+			static double FieldToDouble(lua_State * L, string name);
+			static string FieldToString(lua_State * L, string name);
 		};
 	}
 }

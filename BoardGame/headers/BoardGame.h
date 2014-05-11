@@ -2,6 +2,7 @@
 #define BOARDGAME_H_
 
 #include <lua.h>
+#include <string>
 #include <IBoardGame.h>
 
 namespace Wsq {
@@ -9,10 +10,11 @@ namespace Wsq {
 		class BoardGame : public IBoardGame {
 		  private:
 			const char * _scriptPath = "scripts";
-			const char * _gamePath;
+			string _gamePath;
 			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
 			vector<IGameDetail *> * LoadGameList();
+			void LoadGame(string path);
 		  public:
 			BoardGame();
 			virtual ~BoardGame();

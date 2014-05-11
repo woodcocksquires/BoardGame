@@ -8,7 +8,9 @@
 #include <LuaUtility.h>
 #include <algorithm>
 #include <iostream>
-
+#include <sstream>
+#include <string>
+#include <cstring>
 
 using namespace Wsq::Lua;
 using namespace std;
@@ -101,24 +103,58 @@ void LuaUtility::SetField(lua_State * L, string name, int value){
 	lua_setfield(L, -2, name.c_str());
 }
 
-bool LuaUtility::GetFieldValue(lua_State * L, string name){
-
+bool LuaUtility::FieldToBool(lua_State * L, string name){
+	int depth = GetTablePath(L, name);
+	if(depth == -1){
+		// error
+	}
+	if(!lua_isboolean(L, -1)){
+		// error
+	}
+	bool output = lua_toboolean(L, -1);
+	lua_pop(L, depth);
+	return output;
 }
 
-int LuaUtility::GetFieldValue(lua_State * L, string name){
-
+int LuaUtility::FieldToInt(lua_State * L, string name){
+	int depth = GetTablePath(L, name);
+	if(depth == -1){
+		// error
+	}
+	if(!lua_isnumber(L, -1)){
+		// error
+	}
+	int output = lua_tointeger(L, -1);
+	lua_pop(L, depth);
+	return output;
 }
 
-double LuaUtility::GetFieldValue(lua_State * L, string name){
-
+double LuaUtility::FieldToDouble(lua_State * L, string name){
+	int depth = GetTablePath(L, name);
+	if(depth == -1){
+		// error
+	}
+	if(!lua_isnumber(L, -1)){
+		// error
+	}
+	int output = lua_tonumber(L, -1);
+	lua_pop(L, depth);
+	return output;
 }
 
-char * LuaUtility::GetFieldValue(lua_State * L, string name){
-
-}
-
-string LuaUtility::GetFieldValue(lua_State * L, string name){
-
+string LuaUtility::FieldToString(lua_State * L, string name){
+	int depth = GetTablePath(L, name);
+	if(depth == -1){
+		// error
+	}
+	if(!lua_isstring(L, -1)){
+		// error
+	}
+	const char * luaValue = lua_tostring(L, -1);
+	char output[strlen(luaValue)];
+	strcpy(output, luaValue);
+	lua_pop(L, depth);
+	return output;
 }
 
 bool LuaUtility::GetTable(lua_State * L, string name){
@@ -134,7 +170,23 @@ bool LuaUtility::GetTable(lua_State * L, string name){
 }
 
 int LuaUtility::GetTablePath(lua_State * L, string path){
-
+	stringstream ss(path);
+	string item;
+	string next;
+	int counter = 0;
+	getline(ss, item, '.');
+	while(getline(ss, next, '.')){
+		if(!GetTable(L, item.c_str())){
+			lua_pop(L, counter);
+			return -1;
+		}
+		else{
+			counter++;
+		}
+		item = next;
+	}
+	lua_getfield(L, -1, item.c_str());
+	return counter+1;
 }
 
 
