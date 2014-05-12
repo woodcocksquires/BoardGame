@@ -3,12 +3,20 @@
 
 #include <string>
 #include <lua.hpp>
+#include <exception>
 
 using namespace std;
 
 namespace Wsq {
 	namespace Lua {
 		struct EmptyTable {};
+
+		class NotALuaTableException: public exception{
+			virtual const char * what() const throw(){
+				return "The requested path is not a Lua table";
+			}
+		};
+
 		class LuaUtility {
 		private:
 			static bool GetTable(lua_State * L, string name);
@@ -19,6 +27,7 @@ namespace Wsq {
 			static void CloseState(lua_State * L);
 			static bool GlobalExists(lua_State * L, string name);
 			static bool FieldExists(lua_State * L, string name);
+			static int GetField(lua_State * L, string path);
 			static void SetGlobal(lua_State * L, string name, bool value);
 			static void SetGlobal(lua_State * L, string name, int value);
 			static void SetGlobal(lua_State * L, string name, double value);
@@ -31,10 +40,10 @@ namespace Wsq {
 			static void SetField(lua_State * L, string name, char * value);
 			static void SetField(lua_State * L, string name, string value);
 			static void SetField(lua_State * L, string name, EmptyTable value);
-			static bool FieldToBool(lua_State * L, string name);
-			static int FieldToInt(lua_State * L, string name);
-			static double FieldToDouble(lua_State * L, string name);
-			static string FieldToString(lua_State * L, string name);
+			static bool FieldToBool(lua_State * L, string path);
+			static int FieldToInt(lua_State * L, string path);
+			static double FieldToDouble(lua_State * L, string path);
+			static string FieldToString(lua_State * L, string path);
 		};
 	}
 }

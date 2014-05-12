@@ -4,6 +4,10 @@
 #include <lua.h>
 #include <string>
 #include <IBoardGame.h>
+#include <vector>
+#include <GameDetail.h>
+
+using namespace std;
 
 namespace Wsq {
 	namespace BoardGame {
@@ -14,7 +18,7 @@ namespace Wsq {
 			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
 			vector<IGameDetail *> * LoadGameList();
-			void LoadGame(string path);
+			GameDetail * LoadGameSummary(string path);
 		  public:
 			BoardGame();
 			virtual ~BoardGame();

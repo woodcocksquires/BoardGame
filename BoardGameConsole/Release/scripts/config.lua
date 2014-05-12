@@ -1,4 +1,4 @@
 local config = {}
-config.GamePath = "games"
+config.gamepath = "games"
 
-Wsq.BoardGame.Config = config
+wsq.boardgame.config = config

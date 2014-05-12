@@ -103,10 +103,10 @@ void LuaUtility::SetField(lua_State * L, string name, int value){
 	lua_setfield(L, -2, name.c_str());
 }
 
-bool LuaUtility::FieldToBool(lua_State * L, string name){
-	int depth = GetTablePath(L, name);
+bool LuaUtility::FieldToBool(lua_State * L, string path){
+	int depth = GetTablePath(L, path);
 	if(depth == -1){
-		// error
+		throw NotALuaTableException();
 	}
 	if(!lua_isboolean(L, -1)){
 		// error
@@ -116,10 +116,10 @@ bool LuaUtility::FieldToBool(lua_State * L, string name){
 	return output;
 }
 
-int LuaUtility::FieldToInt(lua_State * L, string name){
-	int depth = GetTablePath(L, name);
+int LuaUtility::FieldToInt(lua_State * L, string path){
+	int depth = GetTablePath(L, path);
 	if(depth == -1){
-		// error
+		throw NotALuaTableException();
 	}
 	if(!lua_isnumber(L, -1)){
 		// error
@@ -129,10 +129,10 @@ int LuaUtility::FieldToInt(lua_State * L, string name){
 	return output;
 }
 
-double LuaUtility::FieldToDouble(lua_State * L, string name){
-	int depth = GetTablePath(L, name);
+double LuaUtility::FieldToDouble(lua_State * L, string path){
+	int depth = GetTablePath(L, path);
 	if(depth == -1){
-		// error
+		throw NotALuaTableException();
 	}
 	if(!lua_isnumber(L, -1)){
 		// error
@@ -142,10 +142,10 @@ double LuaUtility::FieldToDouble(lua_State * L, string name){
 	return output;
 }
 
-string LuaUtility::FieldToString(lua_State * L, string name){
-	int depth = GetTablePath(L, name);
+string LuaUtility::FieldToString(lua_State * L, string path){
+	int depth = GetTablePath(L, path);
 	if(depth == -1){
-		// error
+		throw NotALuaTableException();
 	}
 	if(!lua_isstring(L, -1)){
 		// error
@@ -187,6 +187,14 @@ int LuaUtility::GetTablePath(lua_State * L, string path){
 	}
 	lua_getfield(L, -1, item.c_str());
 	return counter+1;
+}
+
+int LuaUtility::GetField(lua_State * L, string path){
+	int depth = GetTablePath(L, path);
+	if(depth == -1){
+		throw NotALuaTableException();
+	}
+	return depth;
 }
 
 
