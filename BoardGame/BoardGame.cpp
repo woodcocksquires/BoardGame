@@ -1,7 +1,7 @@
 #include <lua.hpp>
 #include <LuaUtility.h>
-#include <BoardGame.h>
 #include <IGameDetail.h>
+#include <BoardGame.h>
 #include <GameDetail.h>
 #include <stdexcept>
 #include <iostream>
@@ -18,11 +18,13 @@ BoardGame::BoardGame(){
 	if(!LuaUtility::GlobalExists(_luaState, "wsq")){
 		LuaUtility::SetGlobal(_luaState, "wsq", EmptyTable());
 	}
-	lua_getglobal(_luaState, "Wsq");
+	lua_getglobal(_luaState, "wsq");
 	if(!LuaUtility::FieldExists(_luaState, "boardgame")){
 		LuaUtility::SetField(_luaState, "boardgame", EmptyTable());
 	}
+
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(_scriptPath, "config.lua"));
+
 	_gamePath = LuaUtility::FieldToString(_luaState, "boardgame.config.gamepath");
 	_gameList = LoadGameList();
 }
@@ -41,7 +43,7 @@ vector<IGameDetail *> * BoardGame::GetGameList(){
 }
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
-	vector<GameDetail *> * gameList = new vector<GameDetail *>();
+	vector<IGameDetail *> * gameList = new vector<IGameDetail *>();
 	LuaUtility::GetField(_luaState, "boardgame");
 	if(!LuaUtility::GlobalExists(_luaState, "games")){
 		LuaUtility::SetField(_luaState, "games", EmptyTable());
@@ -50,21 +52,25 @@ vector<IGameDetail *> * BoardGame::LoadGameList(){
 	for(int g = 0; g < (int)games->size(); g++){
 		gameList->push_back(LoadGameSummary(games->at(g)));
 	}
-
 	lua_pop(_luaState, 1);
 
 	delete games;
-	return 0;
+	return gameList;
 }
 
 GameDetail * BoardGame::LoadGameSummary(string path){
-	int depth = LuaUtility::GetField(_luaState, "games." + path.substr(path.find_last_of('\\') + 1));
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(path, "summary.lua"));
-	GameDetail * gameDetail = new GameDetail(LuaUtility::FieldToString(_luaState, "name"),
-			LuaUtility::FieldToString(_luaState, "description"),
-			path,
-			LuaUtility::FieldToInt(_luaState, "maxplayers"),
-			LuaUtility::FieldToInt(_luaState, "minplayers"));
+	int depth = LuaUtility::GetField(_luaState, "games." + path.substr(path.find_last_of('\\') + 1));
+	GameDetail * gameDetail;
+
+		 gameDetail = new GameDetail(LuaUtility::FieldToString(_luaState, "name"),
+				LuaUtility::FieldToString(_luaState, "description"),
+				path,
+				LuaUtility::FieldToInt(_luaState, "maxplayers"),
+				LuaUtility::FieldToInt(_luaState, "minplayers"));
+
+
+
 	lua_pop(_luaState, depth);
 	return gameDetail;
 }

@@ -7,17 +7,22 @@
 
 #include <iostream>
 #include <BoardGame.h>
+#include <IGameDetail.h>
+#include <vector>
+
 
 using namespace std;
 using namespace Wsq::BoardGame;
 
 int main(){
-	string test;
-
-	cout << "\nstarted\n";
 	BoardGame bg = BoardGame();
-	cout << endl;
-	cin >> test;
+	vector<IGameDetail *> * list = bg.GetGameList();
+
+	for(int i=0; i<(int)list->size(); i++){
+		IGameDetail * gameDetail = list->at(i);
+		cout << "\n\n" << gameDetail->Name();
+		cout << "\n" << gameDetail->Description();
+	}
 
 	return 0;
 }

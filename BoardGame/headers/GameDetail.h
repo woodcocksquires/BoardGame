@@ -25,7 +25,7 @@ namespace Wsq {
 		  public:
 			GameDetail(string name, string description, string path, int maxPlayers, int minPlayers):
 				_name(name), _description(description), _path(path), _maxPlayers(maxPlayers), _minPlayers(minPlayers){}
-			virtual ~GameDetail();
+			virtual ~GameDetail() {};
 			virtual string Name(){ return _name; }
 			virtual string Description(){ return _description; }
 			virtual string Path(){ return _path; }

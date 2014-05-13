@@ -17,6 +17,18 @@ namespace Wsq {
 			}
 		};
 
+		class LuaFieldIsNilException: public exception{
+			virtual const char * what() const throw(){
+				return "The requested field returned nil";
+			}
+		};
+
+		class BadLuaFieldCastException: public exception{
+			virtual const char * what() const throw(){
+				return "The requested field value was not of the requested type";
+			}
+		};
+
 		class LuaUtility {
 		private:
 			static bool GetTable(lua_State * L, string name);

@@ -5,6 +5,7 @@
 #include <string>
 #include <IBoardGame.h>
 #include <vector>
+#include <IGameDetail.h>
 #include <GameDetail.h>
 
 using namespace std;

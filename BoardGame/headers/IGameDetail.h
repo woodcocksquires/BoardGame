@@ -14,7 +14,7 @@ namespace Wsq {
 			virtual string Path() = 0;
 			virtual int MaxPlayers() = 0;
 			virtual int MinPlayers() = 0;
-			virtual ~IGameDetail();
+			virtual ~IGameDetail() {};
 		};
 	}
 }

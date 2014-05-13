@@ -10,7 +10,7 @@ namespace Wsq {
 	namespace BoardGame {
 		class IBoardGame {
 		  public:
-			virtual ~IBoardGame(){};
+			virtual ~IBoardGame() {};
 			virtual vector<IGameDetail *> * GetGameList() = 0;
 		};
 	}
