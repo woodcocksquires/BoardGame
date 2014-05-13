@@ -9,20 +9,31 @@
 #include <BoardGame.h>
 #include <IGameDetail.h>
 #include <vector>
-
+#include <ConsoleUtility.h>
 
 using namespace std;
 using namespace Wsq::BoardGame;
+using namespace Wsq::Console;
 
 int main(){
+	ConsoleUtility::WriteLine("Welcome to the WoodcockSquires BoardGame Console emporium!");
+	ConsoleUtility::WriteLine(2);
+	ConsoleUtility::WriteLine("Please choose the game you would like to play from the list below:");
+	ConsoleUtility::WriteLine();
+
 	BoardGame bg = BoardGame();
 	vector<IGameDetail *> * list = bg.GetGameList();
 
-	for(int i=0; i<(int)list->size(); i++){
+	for(unsigned i=0; i<list->size(); i++){
 		IGameDetail * gameDetail = list->at(i);
-		cout << "\n\n" << gameDetail->Name();
-		cout << "\n" << gameDetail->Description();
+		ConsoleUtility::WriteLine(i+1, gameDetail->Name());
+		ConsoleUtility::WriteLine(gameDetail->Description());
+		ConsoleUtility::WriteLine();
 	}
+
+	int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size());
 
 	return 0;
 }
+
+
