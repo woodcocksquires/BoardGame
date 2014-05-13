@@ -24,16 +24,21 @@ int main(){
 	BoardGame bg = BoardGame();
 	vector<IGameDetail *> * list = bg.GetGameList();
 
-	for(unsigned i=0; i<list->size(); i++){
-		IGameDetail * gameDetail = list->at(i);
-		ConsoleUtility::WriteLine(i+1, gameDetail->Name());
-		ConsoleUtility::WriteLine(gameDetail->Description());
-		ConsoleUtility::WriteLine();
+	if(list->size() > 1){
+		for(unsigned i=0; i<list->size(); i++){
+			IGameDetail * gameDetail = list->at(i);
+			ConsoleUtility::WriteLine(i+1, gameDetail->Name());
+			ConsoleUtility::WriteLine(gameDetail->Description());
+			ConsoleUtility::WriteLine();
+		}
+		int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size());
 	}
-
-	int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size());
+	else if(list->size() == 1){
+		// Load the only game available;
+	}
+	else{
+		ConsoleUtility::WriteLine("No games were found!");
+	}
 
 	return 0;
 }
-
-

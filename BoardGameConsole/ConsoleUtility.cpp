@@ -32,10 +32,13 @@ void ConsoleUtility::WriteLine(int lines){
 
 int ConsoleUtility::GetNumericOption(string message, unsigned maxOption){
 	int value = 0;
-	if(maxOption == 0){
-
+	if(maxOption < 2){
+		return maxOption;
 	}
-	cout << message << ":";
+	string input;
+	cout << message << ": ";
+	cin >> input;
+	//strtoi
 	return 0;
 }
 
