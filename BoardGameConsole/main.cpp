@@ -31,10 +31,11 @@ int main(){
 			ConsoleUtility::WriteLine(gameDetail->Description());
 			ConsoleUtility::WriteLine();
 		}
-		int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size());
+		int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size()+1);
 	}
 	else if(list->size() == 1){
 		// Load the only game available;
+		BoardGame.LoadGame(list->at(0));
 	}
 	else{
 		ConsoleUtility::WriteLine("No games were found!");

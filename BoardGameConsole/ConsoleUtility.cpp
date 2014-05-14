@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
 #include <ConsoleUtility.h>
 
 using namespace std;
@@ -36,10 +37,16 @@ int ConsoleUtility::GetNumericOption(string message, unsigned maxOption){
 		return maxOption;
 	}
 	string input;
-	cout << message << ": ";
-	cin >> input;
-	//strtoi
-	return 0;
+	while(value == 0){
+		cout << message << ": ";
+		cin >> input;
+		value = strtol(input.c_str(), nullptr, 10);
+		if(value == 0 || value > maxOption){
+			value = 0;
+			WriteLine("Invalid entry, please try again.");
+		}
+	}
+	return value;
 }
 
 

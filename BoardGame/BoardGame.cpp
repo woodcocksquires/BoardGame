@@ -74,3 +74,8 @@ GameDetail * BoardGame::LoadGameSummary(string path){
 	lua_pop(_luaState, depth);
 	return gameDetail;
 }
+
+bool * BoardGame::Load(GameDetail * detail){
+
+	return true;
+}

@@ -24,6 +24,7 @@ namespace Wsq {
 			BoardGame();
 			virtual ~BoardGame();
 			virtual vector<IGameDetail *> * GetGameList();
+			bool LoadGame(GameDetail * detail);
 		};
 	}
 }
