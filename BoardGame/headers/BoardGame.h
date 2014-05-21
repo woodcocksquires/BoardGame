@@ -7,6 +7,7 @@
 #include <vector>
 #include <IGameDetail.h>
 #include <GameDetail.h>
+#include <Board.h>
 
 using namespace std;
 
@@ -18,13 +19,17 @@ namespace Wsq {
 			string _gamePath;
 			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
+			Board * _board;
+
 			vector<IGameDetail *> * LoadGameList();
 			GameDetail * LoadGameSummary(string path);
+			void LoadBoardDefinition(IGameDetail * detail);
+			vector<BoardState *> * LoadBoardState(IGameDetail * detail);
 		  public:
 			BoardGame();
 			virtual ~BoardGame();
 			virtual vector<IGameDetail *> * GetGameList();
-			bool LoadGame(GameDetail * detail);
+			virtual bool LoadGame(IGameDetail * detail);
 		};
 	}
 }

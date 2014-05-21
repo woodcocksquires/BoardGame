@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <BoardGame.h>
+#include <IBoardGame.h>
+#include <IBoardGameCreator.h>
 #include <IGameDetail.h>
 #include <vector>
 #include <ConsoleUtility.h>
@@ -21,8 +23,8 @@ int main(){
 	ConsoleUtility::WriteLine("Please choose the game you would like to play from the list below:");
 	ConsoleUtility::WriteLine();
 
-	BoardGame bg = BoardGame();
-	vector<IGameDetail *> * list = bg.GetGameList();
+	IBoardGame * bg = IBoardGameCreator::MakeBoardGame();
+	vector<IGameDetail *> * list = bg->GetGameList();
 
 	if(list->size() > 1){
 		for(unsigned i=0; i<list->size(); i++){
@@ -35,7 +37,7 @@ int main(){
 	}
 	else if(list->size() == 1){
 		// Load the only game available;
-		BoardGame.LoadGame(list->at(0));
+		//bg->LoadGame(list->at(0));
 	}
 	else{
 		ConsoleUtility::WriteLine("No games were found!");

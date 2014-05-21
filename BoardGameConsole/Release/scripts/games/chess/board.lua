@@ -1,6 +1,6 @@
-local chessboard = {}
-chessboard.height = 8
-chessboard.width = 8
+local board = {}
+board.height = 8
+board.width = 8
 
 local state = {}
 
@@ -16,25 +16,27 @@ blackState.value = 1
 
 state[1] = whiteState
 state[2] = blackState
-chessboard.state = state
+board.state = state
 
 local squares = {}
-for s=1, chessboard.height*chessboard.width, 1 do
+for s=1, board.height*board.width, 1 do
 	local newSquare	= {}
-	local row = math.floor((s-1) / chessboard.width)
-	local col = (s-1-(row*chessboard.width)) % chessboard.width
+	local row = math.floor((s-1) / board.width)
+	local col = (s-1-(row*board.width)) % board.width
 	if (((row % 2) + (col % 2)) % 2 == 0) then
 		newSquare.state = whiteState
 	else
 		newSquare.state = blackState
 	end
-	local halfHeight = (chessboard.height-1)/2
-	local halfWidth = (chessboard.width-1)/2
+	local halfHeight = (board.height-1)/2
+	local halfWidth = (board.width-1)/2
 	local maxScore = 5
 	local heightScore = math.ceil(maxScore * (1 - (math.abs(row-halfHeight))/halfHeight))
 	local widthScore =  math.ceil(maxScore * (1 - (math.abs(col-halfWidth))/halfWidth))
 	newSquare.value = heightScore + widthScore
 	squares[s] = newSquare
 
-	print("s-1", s-1, "row", row, "col", col, "value", newSquare.value, "state", newSquare.state.name)
+	--print("s-1", s-1, "row", row, "col", col, "value", newSquare.value, "state", newSquare.state.name)
 end
+
+wsq.boardgame.games.chess.board = board

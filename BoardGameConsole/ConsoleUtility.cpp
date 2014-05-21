@@ -41,7 +41,7 @@ int ConsoleUtility::GetNumericOption(string message, unsigned maxOption){
 		cout << message << ": ";
 		cin >> input;
 		value = strtol(input.c_str(), nullptr, 10);
-		if(value == 0 || value > maxOption){
+		if(value == 0 || value > (int)maxOption){
 			value = 0;
 			WriteLine("Invalid entry, please try again.");
 		}

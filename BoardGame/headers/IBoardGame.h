@@ -12,6 +12,7 @@ namespace Wsq {
 		  public:
 			virtual ~IBoardGame() {};
 			virtual vector<IGameDetail *> * GetGameList() = 0;
+			virtual bool LoadGame(IGameDetail * detail) = 0;
 		};
 	}
 }

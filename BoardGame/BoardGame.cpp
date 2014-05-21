@@ -2,11 +2,15 @@
 #include <LuaUtility.h>
 #include <IGameDetail.h>
 #include <BoardGame.h>
+#include <BoardState.h>
 #include <GameDetail.h>
 #include <stdexcept>
 #include <iostream>
 #include <FileSystemUtility.h>
+#include <Board.h>
 #include <cstring>
+#include <vector>
+#include <string>
 
 using namespace std;
 using namespace Wsq::Lua;
@@ -27,6 +31,7 @@ BoardGame::BoardGame(){
 
 	_gamePath = LuaUtility::FieldToString(_luaState, "boardgame.config.gamepath");
 	_gameList = LoadGameList();
+	_board = nullptr;
 }
 
 BoardGame::~BoardGame(){
@@ -75,7 +80,35 @@ GameDetail * BoardGame::LoadGameSummary(string path){
 	return gameDetail;
 }
 
-bool * BoardGame::Load(GameDetail * detail){
-
+bool BoardGame::LoadGame(IGameDetail * detail){
+	LuaUtility::GetField(_luaState, detail->Name());
+	LoadBoardDefinition(detail);
 	return true;
 }
+
+void BoardGame::LoadBoardDefinition(IGameDetail * detail){
+	int depth = LuaUtility::GetField(_luaState, "board");
+	vector<BoardState *> * boardState = LoadBoardState(detail);
+	//_board = new Board()
+	lua_pop(_luaState, depth);
+}
+
+vector<BoardState *> * BoardGame::LoadBoardState(IGameDetail * detail){
+	int depth = LuaUtility::GetField(_luaState, "state");
+	vector<BoardState *> * boardState = new vector<BoardState *>();
+
+	lua_pushnil(_luaState);
+	while(lua_next(_luaState, -2) != 0){
+		int value = LuaUtility::FieldToInt(_luaState, "value");
+		char identifier = LuaUtility::FieldToString(_luaState, "identifier")[0];
+		string name = LuaUtility::FieldToString(_luaState, "name");
+		string valueString = LuaUtility::FieldToString(_luaState, "valueString");
+		BoardState * newState = new BoardState(value, identifier, name, valueString);
+		boardState->push_back(newState);
+		lua_pop(_luaState, 1);
+	}
+	lua_pop(_luaState, 1);
+
+	return boardState;
+}
+
