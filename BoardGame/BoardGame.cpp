@@ -11,6 +11,7 @@
 #include <cstring>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 using namespace Wsq::Lua;
@@ -26,10 +27,10 @@ BoardGame::BoardGame(){
 	if(!LuaUtility::FieldExists(_luaState, "boardgame")){
 		LuaUtility::SetField(_luaState, "boardgame", EmptyTable());
 	}
-
+	LuaUtility::GetField(_luaState, "boardgame");
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(_scriptPath, "config.lua"));
 
-	_gamePath = LuaUtility::FieldToString(_luaState, "boardgame.config.gamepath");
+	_gamePath = LuaUtility::FieldToString(_luaState, "config.gamepath");
 	_gameList = LoadGameList();
 	_board = nullptr;
 }
@@ -49,8 +50,7 @@ vector<IGameDetail *> * BoardGame::GetGameList(){
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
 	vector<IGameDetail *> * gameList = new vector<IGameDetail *>();
-	LuaUtility::GetField(_luaState, "boardgame");
-	if(!LuaUtility::GlobalExists(_luaState, "games")){
+	if(!LuaUtility::FieldExists(_luaState, "games")){
 		LuaUtility::SetField(_luaState, "games", EmptyTable());
 	}
 	vector<string> * games = FileSystemUtility::GetDirectories(FileSystemUtility::CombinePath(_scriptPath, _gamePath));
@@ -81,7 +81,10 @@ GameDetail * BoardGame::LoadGameSummary(string path){
 }
 
 bool BoardGame::LoadGame(IGameDetail * detail){
+	string name = detail->Name();
+	cout << "\n1 " << string(std::transform(name.begin(), name.end(), name.begin(), ::tolower)) << "\n";
 	LuaUtility::GetField(_luaState, detail->Name());
+	cout << "\n2\n";
 	LoadBoardDefinition(detail);
 	return true;
 }
@@ -102,7 +105,11 @@ vector<BoardState *> * BoardGame::LoadBoardState(IGameDetail * detail){
 		int value = LuaUtility::FieldToInt(_luaState, "value");
 		char identifier = LuaUtility::FieldToString(_luaState, "identifier")[0];
 		string name = LuaUtility::FieldToString(_luaState, "name");
-		string valueString = LuaUtility::FieldToString(_luaState, "valueString");
+		string valueString = string();
+		try{
+			string valueString = LuaUtility::FieldToString(_luaState, "valueString");
+		}
+		catch(Wsq::Lua::LuaFieldIsNilException& e){}
 		BoardState * newState = new BoardState(value, identifier, name, valueString);
 		boardState->push_back(newState);
 		lua_pop(_luaState, 1);

@@ -34,10 +34,11 @@ int main(){
 			ConsoleUtility::WriteLine();
 		}
 		int gameOption = ConsoleUtility::GetNumericOption("Please choose a game to play", list->size()+1);
+		bg->LoadGame(list->at(gameOption-1));
 	}
 	else if(list->size() == 1){
 		// Load the only game available;
-		//bg->LoadGame(list->at(0));
+		bg->LoadGame(list->at(0));
 	}
 	else{
 		ConsoleUtility::WriteLine("No games were found!");
