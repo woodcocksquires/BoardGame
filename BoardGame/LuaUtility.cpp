@@ -54,53 +54,123 @@ bool LuaUtility::FieldExists(lua_State * L, string name){
 }
 
 void LuaUtility::SetGlobal(lua_State * L, string name, bool value){
+	LuaUtility::SetGlobal(L, name, value, false);
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, bool value, bool keepOnStack){
 	lua_pushboolean(L, value);
 	lua_setglobal(L, name.c_str());
+	if(keepOnStack){
+		lua_getglobal(L, name.c_str());
+	}
 }
 
 void LuaUtility::SetGlobal(lua_State * L, string name, double value){
+	LuaUtility::SetGlobal(L, name, value, false);
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, double value, bool keepOnStack){
 	lua_pushnumber(L, value);
 	lua_setglobal(L, name.c_str());
+	if(keepOnStack){
+		lua_getglobal(L, name.c_str());
+	}
 }
 
 void LuaUtility::SetGlobal(lua_State * L, string name, char * value){
+	LuaUtility::SetGlobal(L, name, value, false);
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, char * value, bool keepOnStack){
 	lua_pushstring(L, value);
 	lua_setglobal(L, name.c_str());
+	if(keepOnStack){
+		lua_getglobal(L, name.c_str());
+	}
 }
 
 void LuaUtility::SetGlobal(lua_State * L, string name, EmptyTable value){
+	LuaUtility::SetGlobal(L, name, value, false);
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, EmptyTable value, bool keepOnStack){
 	lua_newtable(L);
 	lua_setglobal(L, name.c_str());
+	if(keepOnStack){
+		lua_getglobal(L, name.c_str());
+	}
 }
 
 void LuaUtility::SetGlobal(lua_State * L, string name, int value){
+	LuaUtility::SetGlobal(L, name, value, false);
+}
+
+void LuaUtility::SetGlobal(lua_State * L, string name, int value, bool keepOnStack){
 	lua_pushinteger(L, lua_Integer(value));
 	lua_setglobal(L, name.c_str());
+	if(keepOnStack){
+		lua_getglobal(L, name.c_str());
+	}
 }
 
 void LuaUtility::SetField(lua_State * L, string name, bool value){
+	LuaUtility::SetField(L, name, value, false);
+}
+
+void LuaUtility::SetField(lua_State * L, string name, bool value, bool keepOnStack){
 	lua_pushboolean(L, value);
 	lua_setfield(L, -2, name.c_str());
+	if(keepOnStack){
+		lua_getfield(L, -1, name.c_str());
+	}
 }
 
 void LuaUtility::SetField(lua_State * L, string name, double value){
+	LuaUtility::SetField(L, name, value, false);
+}
+
+void LuaUtility::SetField(lua_State * L, string name, double value, bool keepOnStack){
 	lua_pushnumber(L, value);
 	lua_setfield(L, -2, name.c_str());
+	if(keepOnStack){
+		lua_getfield(L, -1, name.c_str());
+	}
 }
 
 void LuaUtility::SetField(lua_State * L, string name, char * value){
+	LuaUtility::SetField(L, name, value, false);
+}
+
+void LuaUtility::SetField(lua_State * L, string name, char * value, bool keepOnStack){
 	lua_pushstring(L, value);
 	lua_setfield(L, -2, name.c_str());
+	if(keepOnStack){
+		lua_getfield(L, -1, name.c_str());
+	}
 }
 
 void LuaUtility::SetField(lua_State * L, string name, EmptyTable value){
+	LuaUtility::SetField(L, name, value, false);
+}
+
+void LuaUtility::SetField(lua_State * L, string name, EmptyTable value, bool keepOnStack){
 	lua_newtable(L);
 	lua_setfield(L, -2, name.c_str());
+	if(keepOnStack){
+		lua_getfield(L, -1, name.c_str());
+	}
 }
 
 void LuaUtility::SetField(lua_State * L, string name, int value){
+	LuaUtility::SetField(L, name, value, false);
+}
+
+void LuaUtility::SetField(lua_State * L, string name, int value, bool keepOnStack){
 	lua_pushinteger(L, value);
 	lua_setfield(L, -2, name.c_str());
+	if(keepOnStack){
+		lua_getfield(L, -1, name.c_str());
+	}
 }
 
 bool LuaUtility::FieldToBool(lua_State * L, string path){

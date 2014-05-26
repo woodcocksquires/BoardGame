@@ -9,6 +9,7 @@
 #define IBOARD_H_
 
 #include <IBoardState.h>
+#include <IBoardLocation.h>
 
 namespace Wsq {
 	namespace BoardGame {

@@ -12,6 +12,7 @@ namespace Wsq {
 			virtual string Name() = 0;
 			virtual string Description() = 0;
 			virtual string Path() = 0;
+			virtual string ShortPath() = 0;
 			virtual int MaxPlayers() = 0;
 			virtual int MinPlayers() = 0;
 			virtual ~IGameDetail() {};

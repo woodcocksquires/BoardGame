@@ -2,6 +2,7 @@
 #define IBOARDGAME_H_
 
 #include <IGameDetail.h>
+#include <IBoard.h>
 #include <vector>
 
 using namespace std;
@@ -13,6 +14,7 @@ namespace Wsq {
 			virtual ~IBoardGame() {};
 			virtual vector<IGameDetail *> * GetGameList() = 0;
 			virtual bool LoadGame(IGameDetail * detail) = 0;
+			virtual IBoard * GetBoard() = 0;
 		};
 	}
 }

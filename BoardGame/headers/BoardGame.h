@@ -13,6 +13,11 @@ using namespace std;
 
 namespace Wsq {
 	namespace BoardGame {
+		class BoardLocationState: public exception{
+			virtual const char * what() const throw(){
+				return "The board location has no board state defined.";
+			}
+		};
 		class BoardGame : public IBoardGame {
 		  private:
 			const char * _scriptPath = "scripts";
@@ -24,12 +29,14 @@ namespace Wsq {
 			vector<IGameDetail *> * LoadGameList();
 			GameDetail * LoadGameSummary(string path);
 			void LoadBoardDefinition(IGameDetail * detail);
-			vector<BoardState *> * LoadBoardState(IGameDetail * detail);
+			vector<BoardState *> * LoadBoardState();
+			vector<BoardLocation *> * InitialiseBoard(vector<BoardState *> * boardState);
 		  public:
 			BoardGame();
 			virtual ~BoardGame();
 			virtual vector<IGameDetail *> * GetGameList();
 			virtual bool LoadGame(IGameDetail * detail);
+			virtual IBoard * GetBoard();
 		};
 	}
 }

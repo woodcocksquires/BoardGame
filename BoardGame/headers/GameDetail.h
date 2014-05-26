@@ -20,15 +20,17 @@ namespace Wsq {
 			string _name;
 			string _description;
 			string _path;
+			string _shortPath;
 			int _maxPlayers;
 			int _minPlayers;
 		  public:
-			GameDetail(string name, string description, string path, int maxPlayers, int minPlayers):
-				_name(name), _description(description), _path(path), _maxPlayers(maxPlayers), _minPlayers(minPlayers){}
+			GameDetail(string name, string description, string path, string shortPath, int maxPlayers, int minPlayers):
+				_name(name), _description(description), _path(path), _shortPath(shortPath), _maxPlayers(maxPlayers), _minPlayers(minPlayers){}
 			virtual ~GameDetail() {};
 			virtual string Name(){ return _name; }
 			virtual string Description(){ return _description; }
 			virtual string Path(){ return _path; }
+			virtual string ShortPath(){ return _shortPath; }
 			virtual int MaxPlayers(){ return _maxPlayers; }
 			virtual int MinPlayers(){ return _minPlayers; }
 		};

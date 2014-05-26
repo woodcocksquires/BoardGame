@@ -6,8 +6,8 @@
  */
 
 #include <iostream>
-#include <BoardGame.h>
 #include <IBoardGame.h>
+#include <IBoard.h>
 #include <IBoardGameCreator.h>
 #include <IGameDetail.h>
 #include <vector>
@@ -42,6 +42,16 @@ int main(){
 	}
 	else{
 		ConsoleUtility::WriteLine("No games were found!");
+	}
+
+	cout << "\n\n";
+	IBoard * board = bg->GetBoard();
+	for(int h = board->GetHeight()-1; h >= 0; h--){
+		for(unsigned w = 0; w < board->GetWidth(); w++){
+			IBoardLocation * ibl = board->GetBoardLocation(h, w);
+			cout << "(" << ibl->GetState()->GetIdentifier() << ":" << ibl->GetValue() << "),";
+		}
+		cout << "\n";
 	}
 
 	return 0;
