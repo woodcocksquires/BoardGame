@@ -10,18 +10,21 @@
 
 #include <IBoardLocation.h>
 #include <IBoardState.h>
-#include <BoardState.h>
+#include <IBoardPiece.h>
 
 namespace Wsq {
 	namespace BoardGame {
 		class BoardLocation: public IBoardLocation {
 		  private:
-			BoardState * _state;
+			IBoardState * _state;
+			IBoardPiece * _piece;
 			int _value;
 		  public:
-			BoardLocation(BoardState * state, int value);
+			BoardLocation(IBoardState * state, int value);
 			virtual ~BoardLocation();
 			virtual IBoardState * GetState();
+			virtual IBoardPiece * GetPiece();
+			virtual bool SetPiece(IBoardPiece * piece);
 			virtual int GetValue();
 		};
 	}

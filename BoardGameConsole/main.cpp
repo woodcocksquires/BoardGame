@@ -23,6 +23,7 @@ int main(){
 	ConsoleUtility::WriteLine("Please choose the game you would like to play from the list below:");
 	ConsoleUtility::WriteLine();
 
+
 	IBoardGame * bg = IBoardGameCreator::MakeBoardGame();
 	vector<IGameDetail *> * list = bg->GetGameList();
 

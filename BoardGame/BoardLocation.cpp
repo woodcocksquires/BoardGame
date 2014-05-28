@@ -10,10 +10,24 @@
 
 using namespace Wsq::BoardGame;
 
-BoardLocation::BoardLocation(BoardState * state, int value): _state(state), _value(value) {}
+BoardLocation::BoardLocation(IBoardState * state, int value): _state(state), _value(value) {
+	_piece = nullptr;
+}
 BoardLocation::~BoardLocation(){}
 
-IBoardState * BoardLocation::GetState() { return dynamic_cast<IBoardState *>(_state); }
+IBoardState * BoardLocation::GetState() { return _state; }
+
+IBoardPiece * BoardLocation::GetPiece() { return _piece; }
+
+bool BoardLocation::SetPiece(IBoardPiece * piece){
+	if(_piece != nullptr && piece != nullptr){
+		return false;
+	}
+
+	_piece = piece;
+	return true;
+}
+
 int BoardLocation::GetValue() { return _value; }
 
 

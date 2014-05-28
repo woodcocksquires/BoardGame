@@ -9,6 +9,7 @@
 #define IBOARDLOCATION_H_
 
 #include <IBoardState.h>
+#include <IBoardPiece.h>
 
 namespace Wsq {
 	namespace BoardGame {
@@ -18,6 +19,8 @@ namespace Wsq {
 			virtual ~IBoardLocation() {}
 			virtual IBoardState * GetState() = 0;
 			virtual int GetValue() = 0;
+			virtual IBoardPiece * GetPiece() = 0;
+			virtual bool SetPiece(IBoardPiece *) = 0;
 		};
 	}
 }

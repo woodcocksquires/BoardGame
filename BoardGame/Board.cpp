@@ -9,7 +9,7 @@
 
 using namespace Wsq::BoardGame;
 
-Board::Board(int height, int width, vector<BoardState *> * boardState, vector<BoardLocation *> * boardLocation):
+Board::Board(int height, int width, vector<IBoardState *> * boardState, vector<IBoardLocation *> * boardLocation):
 		_height(height), _width(width), _boardState(boardState), _boardLocation(boardLocation) {}
 
 Board::~Board(){

@@ -16,14 +16,15 @@ using namespace std;
 namespace Wsq {
 	namespace BoardGame {
 		class BoardState: public IBoardState {
+		  friend class BoardStateFactory;
 		  private:
 			int _value;
 			char _identifier;
 			string _name;
 			string _valueString;
-		  public:
 			BoardState(int value, char identifier, string name, string valueString);
 			~BoardState() {}
+		  public:
 			virtual int GetValue();
 			virtual char GetIdentifier();
 			virtual string GetName();

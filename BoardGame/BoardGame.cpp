@@ -32,7 +32,7 @@ BoardGame::BoardGame(){
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(_scriptPath, "config.lua"));
 
 	_gamePath = LuaUtility::FieldToString(_luaState, "config.gamepath");
-	_gameList = LoadGameList();
+	_gameList = nullptr;
 	_board = nullptr;
 }
 
@@ -46,6 +46,9 @@ BoardGame::~BoardGame(){
 }
 
 vector<IGameDetail *> * BoardGame::GetGameList(){
+	if(_gameList == nullptr){
+		return LoadGameList();
+	}
 	return _gameList;
 }
 
@@ -58,12 +61,12 @@ vector<IGameDetail *> * BoardGame::LoadGameList(){
 	for(int g = 0; g < (int)games->size(); g++){
 		gameList->push_back(LoadGameSummary(games->at(g)));
 	}
-
+	_gameList = gameList;
 	delete games;
 	return gameList;
 }
 
-GameDetail * BoardGame::LoadGameSummary(string path){
+IGameDetail * BoardGame::LoadGameSummary(string path){
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(path, "summary.lua"));
 	string shortPath = StringUtility::ToLower(path.substr(path.find_last_of('\\') + 1));
 	int depth = LuaUtility::GetField(_luaState, shortPath);
@@ -87,18 +90,18 @@ bool BoardGame::LoadGame(IGameDetail * detail){
 void BoardGame::LoadBoardDefinition(IGameDetail * detail){
 	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(detail->Path(), "board.lua"));
 	int depth = LuaUtility::GetField(_luaState, "board");
-	vector<BoardState *> * boardState = LoadBoardState();
-	vector<BoardLocation *> * boardLocation = InitialiseBoard(boardState);
+	vector<IBoardState *> * boardState = LoadBoardState();
+	vector<IBoardLocation *> * boardLocation = InitialiseBoard(boardState);
 	int height = LuaUtility::FieldToInt(_luaState, "height");
 	int width = LuaUtility::FieldToInt(_luaState, "width");
 	_board = new Board(height, width, boardState, boardLocation);
 	lua_pop(_luaState, depth);
 }
 
-vector<BoardState *> * BoardGame::LoadBoardState(){
+vector<IBoardState *> * BoardGame::LoadBoardState(){
 	int depth = LuaUtility::GetField(_luaState, "state");
 
-	vector<BoardState *> * boardState = new vector<BoardState *>();
+	vector<IBoardState *> * boardState = new vector<IBoardState *>();
 
 	lua_pushnil(_luaState);
 	while(lua_next(_luaState, -2) != 0){
@@ -112,7 +115,8 @@ vector<BoardState *> * BoardGame::LoadBoardState(){
 		catch(Wsq::Lua::LuaFieldIsNilException& e){
 			lua_pop(_luaState, 1);
 		}
-		BoardState * newState = new BoardState(value, identifier, name, valueString);
+
+		IBoardState * newState = GetBoardStateFactory()->Create(value, identifier, name, valueString);
 		boardState->push_back(newState);
 		lua_pop(_luaState, 1);
 	}
@@ -121,14 +125,14 @@ vector<BoardState *> * BoardGame::LoadBoardState(){
 	return boardState;
 }
 
-vector<BoardLocation *> * BoardGame::InitialiseBoard(vector<BoardState *> * boardState){
+vector<IBoardLocation *> * BoardGame::InitialiseBoard(vector<IBoardState *> * boardState){
 	int depth = LuaUtility::GetField(_luaState, "locations");
-	vector<BoardLocation *> * boardLocation = new vector<BoardLocation *>();
+	vector<IBoardLocation *> * boardLocation = new vector<IBoardLocation *>();
 
 	lua_pushnil(_luaState);
 	while(lua_next(_luaState, -2) != 0){
 		char stateIdentifier = LuaUtility::FieldToString(_luaState, "state.identifier")[0];
-		BoardState * state = nullptr;
+		IBoardState * state = nullptr;
 		for(unsigned s = 0; s < boardState->size(); s++){
 			if(boardState->at(s)->GetIdentifier() == stateIdentifier){
 				state = boardState->at(s);
@@ -151,5 +155,9 @@ vector<BoardLocation *> * BoardGame::InitialiseBoard(vector<BoardState *> * boar
 
 IBoard * BoardGame::GetBoard(){
 	return (IBoard *)_board;
+}
+
+IBoardStateFactory * BoardGame::GetBoardStateFactory(){
+	return _boardStateFactory;
 }
 

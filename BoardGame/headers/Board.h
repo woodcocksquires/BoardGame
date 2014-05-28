@@ -22,10 +22,10 @@ namespace Wsq {
 		class Board: public IBoard {
 		  private:
 			int _height, _width;
-			vector<BoardState *> * _boardState;
-			vector<BoardLocation *> * _boardLocation;
+			vector<IBoardState *> * _boardState;
+			vector<IBoardLocation *> * _boardLocation;
 		  public:
-			Board(int height, int width, vector<BoardState *> * boardState, vector<BoardLocation *> * boardLocation);
+			Board(int height, int width, vector<IBoardState *> * boardState, vector<IBoardLocation *> * boardLocation);
 			~Board();
 			virtual int GetHeight();
 			virtual int GetWidth();
