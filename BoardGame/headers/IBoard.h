@@ -17,8 +17,8 @@ namespace Wsq {
 		  public:
 			IBoard() {}
 			virtual ~IBoard() {}
-			virtual int GetHeight() = 0;
-			virtual int GetWidth() = 0;
+			virtual unsigned GetHeight() = 0;
+			virtual unsigned GetWidth() = 0;
 			virtual IBoardLocation * GetBoardLocation(int position) = 0;
 			virtual IBoardLocation * GetBoardLocation(int row, int col) = 0;
 		};

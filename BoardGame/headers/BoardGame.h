@@ -6,8 +6,9 @@
 #include <IBoardGame.h>
 #include <vector>
 #include <IGameDetail.h>
-#include <GameDetail.h>
+#include <IGameDetailFactory.h>
 #include <IBoardState.h>
+#include <IBoardStateFactory.h>
 #include <IBoardLocation.h>
 #include <Board.h>
 
@@ -27,10 +28,12 @@ namespace Wsq {
 			lua_State * _luaState;
 			vector<IGameDetail *> * _gameList;
 			IBoard * _board;
+			IGameDetailFactory * _gameDetailFactory;
 			IBoardStateFactory * _boardStateFactory;
 
+
 			vector<IGameDetail *> * LoadGameList();
-			IGameDetail * LoadGameSummary(string path);
+			//IGameDetail * LoadGameSummary(string path);
 			void LoadBoardDefinition(IGameDetail * detail);
 			vector<IBoardState *> * LoadBoardState();
 			vector<IBoardLocation *> * InitialiseBoard(vector<IBoardState *> * boardState);
@@ -41,8 +44,11 @@ namespace Wsq {
 			virtual vector<IGameDetail *> * GetGameList();
 			virtual bool LoadGame(IGameDetail * detail);
 			virtual IBoard * GetBoard();
+
 			virtual IBoardStateFactory * GetBoardStateFactory();
 			virtual void SetBoardStateFactory(IBoardStateFactory * factory);
+			virtual IGameDetailFactory * GetGameDetailFactory();
+			virtual void SetGameDetailFactory(IGameDetailFactory * factory);
 		};
 	}
 }

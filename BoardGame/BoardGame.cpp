@@ -9,6 +9,7 @@
 #include <BoardGame.h>
 #include <BoardState.h>
 #include <GameDetail.h>
+#include <GameDetailFactory.h>
 #include <FileSystemUtility.h>
 #include <Board.h>
 #include <StringUtility.h>
@@ -34,6 +35,9 @@ BoardGame::BoardGame(){
 	_gamePath = LuaUtility::FieldToString(_luaState, "config.gamepath");
 	_gameList = nullptr;
 	_board = nullptr;
+
+	_gameDetailFactory = nullptr;
+	_boardStateFactory = nullptr;
 }
 
 BoardGame::~BoardGame(){
@@ -42,6 +46,9 @@ BoardGame::~BoardGame(){
 	}
 
 	delete _gameList;
+	delete _gameDetailFactory;
+	delete _boardStateFactory;
+
 	LuaUtility::CloseState(_luaState);
 }
 
@@ -59,26 +66,11 @@ vector<IGameDetail *> * BoardGame::LoadGameList(){
 	}
 	vector<string> * games = FileSystemUtility::GetDirectories(FileSystemUtility::CombinePath(_scriptPath, _gamePath));
 	for(int g = 0; g < (int)games->size(); g++){
-		gameList->push_back(LoadGameSummary(games->at(g)));
+		gameList->push_back(GetGameDetailFactory()->Create(_luaState, games->at(g)));
 	}
 	_gameList = gameList;
 	delete games;
 	return gameList;
-}
-
-IGameDetail * BoardGame::LoadGameSummary(string path){
-	LuaUtility::LoadAndExecuteFile(_luaState, FileSystemUtility::CombinePath(path, "summary.lua"));
-	string shortPath = StringUtility::ToLower(path.substr(path.find_last_of('\\') + 1));
-	int depth = LuaUtility::GetField(_luaState, shortPath);
-	GameDetail * gameDetail = new GameDetail(LuaUtility::FieldToString(_luaState, "name"),
-		LuaUtility::FieldToString(_luaState, "description"),
-		path,
-		shortPath,
-		LuaUtility::FieldToInt(_luaState, "maxplayers"),
-		LuaUtility::FieldToInt(_luaState, "minplayers"));
-
-	lua_pop(_luaState, depth);
-	return gameDetail;
 }
 
 bool BoardGame::LoadGame(IGameDetail * detail){
@@ -161,3 +153,24 @@ IBoardStateFactory * BoardGame::GetBoardStateFactory(){
 	return _boardStateFactory;
 }
 
+void BoardGame::SetBoardStateFactory(IBoardStateFactory * factory){
+	if(_boardStateFactory != nullptr){
+		delete _boardStateFactory;
+	}
+	_boardStateFactory = factory;
+}
+
+IGameDetailFactory * BoardGame::GetGameDetailFactory(){
+	if(_gameDetailFactory == nullptr){
+		_gameDetailFactory = new GameDetailFactory();
+	}
+
+	return _gameDetailFactory;
+}
+
+void BoardGame::SetGameDetailFactory(IGameDetailFactory * factory){
+	if(_gameDetailFactory != nullptr){
+		delete _gameDetailFactory;
+	}
+	_gameDetailFactory = factory;
+}

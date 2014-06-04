@@ -24,8 +24,8 @@ Board::~Board(){
 	delete _boardLocation;
 }
 
-int Board::GetHeight() { return _height; }
-int Board::GetWidth() { return _width; }
+unsigned Board::GetHeight() { return _height; }
+unsigned Board::GetWidth() { return _width; }
 
 IBoardLocation * Board::GetBoardLocation(int position){
 	if(position >= 0 && position < (int)_boardLocation->size()){

@@ -3,6 +3,7 @@
 
 #include <IGameDetail.h>
 #include <IBoardStateFactory.h>
+#include <IGameDetailFactory.h>
 #include <IBoard.h>
 #include <vector>
 
@@ -18,6 +19,8 @@ namespace Wsq {
 			virtual IBoard * GetBoard() = 0;
 			virtual IBoardStateFactory * GetBoardStateFactory() = 0;
 			virtual void SetBoardStateFactory(IBoardStateFactory * factory) = 0;
+			virtual IGameDetailFactory * GetGameDetailFactory() = 0;
+			virtual void SetGameDetailFactory(IGameDetailFactory * factory) = 0;
 		};
 	}
 }

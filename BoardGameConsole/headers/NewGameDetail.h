@@ -1,23 +1,24 @@
 /*
- * GameDetail.h
+ * NewGameDetail.h
  *
- *  Created on: 12 May 2014
+ *  Created on: 3 Jun 2014
  *      Author: Andrew.squires
  */
 
-#ifndef GAMEDETAIL_H_
-#define GAMEDETAIL_H_
+#ifndef NEWGAMEDETAIL_H_
+#define NEWGAMEDETAIL_H_
 
-#include <string>
-#include <IGameDetail.h>
-#include <Lua.hpp>
+#include<IGameDetail.h>
+#include<Lua.hpp>
+#include<string>
 
+using namespace Wsq::BoardGame;
 using namespace std;
 
 namespace Wsq {
-	namespace BoardGame {
-		class GameDetail: public IGameDetail {
-		  friend class GameDetailFactory;
+	namespace Test {
+		class NewGameDetail: public IGameDetail {
+		  friend class NewGameDetailFactory;
 		  private:
 			string _name;
 			string _description;
@@ -25,19 +26,20 @@ namespace Wsq {
 			string _shortPath;
 			int _maxPlayers;
 			int _minPlayers;
-			GameDetail(lua_State * L, string path);
+			string _someProperty;
+			NewGameDetail(lua_State * L, string path);
 		  public:
-			virtual ~GameDetail() {};
+			virtual ~NewGameDetail() {};
 			virtual string Name(){ return _name; }
 			virtual string Description(){ return _description; }
 			virtual string Path(){ return _path; }
 			virtual string ShortPath(){ return _shortPath; }
 			virtual int MaxPlayers(){ return _maxPlayers; }
 			virtual int MinPlayers(){ return _minPlayers; }
+			string SomeProperty(){ return _someProperty; }
 		};
 	}
 }
 
 
-
-#endif /* GAMEDETAIL_H_ */
+#endif /* NEWGAMEDETAIL_H_ */
