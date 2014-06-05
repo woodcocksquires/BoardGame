@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <IGameDetail.h>
+#include <IBoardGame.h>
 #include <BoardGame.h>
 #include <BoardState.h>
 #include <GameDetail.h>
@@ -38,6 +39,7 @@ BoardGame::BoardGame(){
 
 	_gameDetailFactory = nullptr;
 	_boardStateFactory = nullptr;
+	_loadGameList = &LoadGameList;
 }
 
 BoardGame::~BoardGame(){
@@ -54,6 +56,7 @@ BoardGame::~BoardGame(){
 
 vector<IGameDetail *> * BoardGame::GetGameList(){
 	if(_gameList == nullptr){
+		_gameList = _loadGameList();
 		return LoadGameList();
 	}
 	return _gameList;
@@ -173,4 +176,8 @@ void BoardGame::SetGameDetailFactory(IGameDetailFactory * factory){
 		delete _gameDetailFactory;
 	}
 	_gameDetailFactory = factory;
+}
+
+void BoardGame::SetGameListLoader(vector<IGameDetail *> * (*loadGameList)()){
+	_loadGameList = loadGameList;
 }

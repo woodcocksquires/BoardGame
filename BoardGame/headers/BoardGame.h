@@ -30,10 +30,9 @@ namespace Wsq {
 			IBoard * _board;
 			IGameDetailFactory * _gameDetailFactory;
 			IBoardStateFactory * _boardStateFactory;
+			vector<IGameDetail *> * (*_loadGameList)();
 
-
-			vector<IGameDetail *> * LoadGameList();
-			//IGameDetail * LoadGameSummary(string path);
+			static vector<IGameDetail *> * LoadGameList();
 			void LoadBoardDefinition(IGameDetail * detail);
 			vector<IBoardState *> * LoadBoardState();
 			vector<IBoardLocation *> * InitialiseBoard(vector<IBoardState *> * boardState);
@@ -41,11 +40,13 @@ namespace Wsq {
 		  public:
 			BoardGame();
 			virtual ~BoardGame();
+
 			virtual vector<IGameDetail *> * GetGameList();
 			virtual bool LoadGame(IGameDetail * detail);
 			virtual IBoard * GetBoard();
 
 			virtual IBoardStateFactory * GetBoardStateFactory();
+			virtual void SetGameListLoader(vector<IGameDetail *> * (*loadGameList)());
 			virtual void SetBoardStateFactory(IBoardStateFactory * factory);
 			virtual IGameDetailFactory * GetGameDetailFactory();
 			virtual void SetGameDetailFactory(IGameDetailFactory * factory);
