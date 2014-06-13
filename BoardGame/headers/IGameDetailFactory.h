@@ -1,10 +1,10 @@
 /*
- * IGameDetailFactory.h
+/* * IGameDetailFactory.h
  *
  *  Created on: 30 May 2014
  *      Author: andrew.squires
  */
-
+/*
 #ifndef IGAMEDETAILFACTORY_H_
 #define IGAMEDETAILFACTORY_H_
 

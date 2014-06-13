@@ -1,3 +1,4 @@
+/*
 #include <lua.hpp>
 #include <LuaUtility.h>
 #include <cstring>
@@ -22,7 +23,7 @@ using namespace Wsq::FileSystem;
 using namespace Wsq::Text;
 
 BoardGame::BoardGame(){
-	_luaState = LuaUtility::GetNewState();
+	_luaState = LuaUtility::GetState();
 	if(!LuaUtility::GlobalExists(_luaState, "wsq")){
 		LuaUtility::SetGlobal(_luaState, "wsq", EmptyTable(), true);
 	}
@@ -51,29 +52,27 @@ BoardGame::~BoardGame(){
 	delete _gameDetailFactory;
 	delete _boardStateFactory;
 
-	LuaUtility::CloseState(_luaState);
+	LuaUtility::CloseState();
 }
 
 vector<IGameDetail *> * BoardGame::GetGameList(){
 	if(_gameList == nullptr){
 		_gameList = _loadGameList();
-		return LoadGameList();
 	}
 	return _gameList;
 }
 
 vector<IGameDetail *> * BoardGame::LoadGameList(){
-	vector<IGameDetail *> * gameList = new vector<IGameDetail *>();
 	if(!LuaUtility::FieldExists(_luaState, "games")){
 		LuaUtility::SetField(_luaState, "games", EmptyTable(), true);
 	}
 	vector<string> * games = FileSystemUtility::GetDirectories(FileSystemUtility::CombinePath(_scriptPath, _gamePath));
 	for(int g = 0; g < (int)games->size(); g++){
-		gameList->push_back(GetGameDetailFactory()->Create(_luaState, games->at(g)));
+		//_gameList->push_back(GetGameDetailFactory()->Create(LuaUtility::GetState(), games->at(g)));
 	}
-	_gameList = gameList;
+
 	delete games;
-	return gameList;
+	return _gameList;
 }
 
 bool BoardGame::LoadGame(IGameDetail * detail){
@@ -181,3 +180,4 @@ void BoardGame::SetGameDetailFactory(IGameDetailFactory * factory){
 void BoardGame::SetGameListLoader(vector<IGameDetail *> * (*loadGameList)()){
 	_loadGameList = loadGameList;
 }
+*/

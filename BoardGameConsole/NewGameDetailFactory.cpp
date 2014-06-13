@@ -5,7 +5,7 @@
  *      Author: Andrew.squires
  */
 
-
+/*
 #include<NewGameDetailFactory.h>
 #include<NewGameDetail.h>
 #include<IGameDetail.h>
@@ -20,3 +20,4 @@ IGameDetail * NewGameDetailFactory::Create(lua_State * L, string path){
 }
 
 
+*/

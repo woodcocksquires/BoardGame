@@ -1,4 +1,4 @@
-#ifndef BOARDGAME_H_
+/*#ifndef BOARDGAME_H_
 #define BOARDGAME_H_
 
 #include <lua.h>
@@ -23,15 +23,14 @@ namespace Wsq {
 		};
 		class BoardGame : public IBoardGame {
 		  private:
-			const char * _scriptPath = "scripts";
-			string _gamePath;
-			lua_State * _luaState;
-			vector<IGameDetail *> * _gameList;
+			static char * _scriptPath;
+			static string _gamePath;
+			static lua_State * _luaState;
+			static vector<IGameDetail *> * _gameList;
 			IBoard * _board;
 			IGameDetailFactory * _gameDetailFactory;
 			IBoardStateFactory * _boardStateFactory;
 			vector<IGameDetail *> * (*_loadGameList)();
-
 			static vector<IGameDetail *> * LoadGameList();
 			void LoadBoardDefinition(IGameDetail * detail);
 			vector<IBoardState *> * LoadBoardState();

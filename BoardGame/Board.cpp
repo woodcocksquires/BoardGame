@@ -4,7 +4,7 @@
  *  Created on: 19 May 2014
  *      Author: andrew.squires
  */
-
+/*
 #include <Board.h>
 
 using namespace Wsq::BoardGame;
@@ -37,7 +37,7 @@ IBoardLocation * Board::GetBoardLocation(int position){
 IBoardLocation * Board::GetBoardLocation(int row, int col){
 	return GetBoardLocation(row * _width + col);
 }
-
+*/
 
 
 

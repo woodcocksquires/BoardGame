@@ -4,7 +4,7 @@
  *  Created on: 12 May 2014
  *      Author: Andrew.squires
  */
-
+/*
 #include <Lua.hpp>
 #include <string>
 #include <LuaUtility.h>
@@ -31,5 +31,5 @@ GameDetail::GameDetail(lua_State * L, string path){
 
 		lua_pop(L, depth);
 }
-
+*/
 

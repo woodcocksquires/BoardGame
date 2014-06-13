@@ -4,7 +4,7 @@
  *  Created on: 30 Apr 2014
  *      Author: Andrew.squires
  */
-
+/*
 #include <FileSystemUtility.h>
 #include <dirent.h>
 #include <iostream>
@@ -59,7 +59,7 @@ string FileSystemUtility::CombinePath(string path, string append, char separator
 	}
 	return output;
 }
-
+*/
 
 
 

@@ -4,7 +4,7 @@
  *  Created on: 13 May 2014
  *      Author: Andy
  */
-
+/*
 #include <string>
 #include <iostream>
 #include <cstdlib>
@@ -49,4 +49,4 @@ int ConsoleUtility::GetNumericOption(string message, unsigned maxOption){
 	return value;
 }
 
-
+*/

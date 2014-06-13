@@ -4,7 +4,7 @@
  *  Created on: 12 May 2014
  *      Author: Andrew.squires
  */
-
+/*
 #ifndef GAMEDETAIL_H_
 #define GAMEDETAIL_H_
 

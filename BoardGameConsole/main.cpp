@@ -4,7 +4,7 @@
  *  Created on: 25 Apr 2014
  *      Author: Andy
  */
-
+/*
 #include <iostream>
 #include <IBoardGame.h>
 #include <IBoard.h>
@@ -61,4 +61,9 @@ int main(){
 	}
 
 	return 0;
+}
+*/
+
+int main() {
+
 }

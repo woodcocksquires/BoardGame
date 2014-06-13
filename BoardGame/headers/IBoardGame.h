@@ -1,4 +1,4 @@
-#ifndef IBOARDGAME_H_
+/*#ifndef IBOARDGAME_H_
 #define IBOARDGAME_H_
 
 #include <IGameDetail.h>

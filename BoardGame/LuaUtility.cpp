@@ -4,7 +4,7 @@
  *  Created on: 1 May 2014
  *      Author: Andrew.squires
  */
-
+/*
 #include <LuaUtility.h>
 #include <algorithm>
 #include <iostream>
@@ -15,18 +15,24 @@
 using namespace Wsq::Lua;
 using namespace std;
 
-lua_State * LuaUtility::GetNewState(){
-	lua_State * L = luaL_newstate();
-	luaL_openlibs(L);
-	return L;
+lua_State * LuaUtility::GetState(){
+	if(_L == nullptr){
+		_L = luaL_newstate();
+		luaL_openlibs(_L);
+	}
+
+	return _L;
 }
 
 int LuaUtility::LoadAndExecuteFile(lua_State * L, string path){
 	return luaL_dofile(L, path.c_str());
 }
 
-void LuaUtility::CloseState(lua_State * L){
-	lua_close(L);
+void LuaUtility::CloseState(){
+	if(_L != nullptr){
+		lua_close(_L);
+		_L = nullptr;
+	}
 }
 
 bool LuaUtility::GlobalExists(lua_State * L, string name){
@@ -260,6 +266,6 @@ int LuaUtility::GetTablePath(lua_State * L, string path){
 int LuaUtility::GetField(lua_State * L, string path){
 	return GetTablePath(L, path);
 }
-
+*/
 
 

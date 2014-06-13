@@ -4,7 +4,7 @@
  *  Created on: 13 May 2014
  *      Author: Andy
  */
-
+/*
 #ifndef CONSOLEUTILITY_H_
 #define CONSOLEUTILITY_H_
 

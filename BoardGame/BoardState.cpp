@@ -4,7 +4,7 @@
  *  Created on: 19 May 2014
  *      Author: andrew.squires
  */
-
+/*
 #include <string>
 #include <BoardState.h>
 
@@ -21,3 +21,4 @@ int BoardState::GetValue() { return _value; }
 char BoardState::GetIdentifier() { return _identifier; }
 string BoardState::GetName() { return _name; }
 string BoardState::GetValueString() { return _valueString; }
+*/

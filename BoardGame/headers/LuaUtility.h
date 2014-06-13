@@ -1,4 +1,4 @@
-#ifndef LUAUTILTIY_H_
+/*#ifndef LUAUTILTIY_H_
 #define LUAUTILITY_H_
 
 #include <string>
@@ -31,12 +31,13 @@ namespace Wsq {
 
 		class LuaUtility {
 		private:
+			static lua_State * _L;
 			static bool GetTable(lua_State * L, string name);
 			static int GetTablePath(lua_State * L, string path);
 		  public:
-			static lua_State * GetNewState();
+			static lua_State * GetState();
 			static int LoadAndExecuteFile(lua_State * L, string path);
-			static void CloseState(lua_State * L);
+			static void CloseState();
 			static bool GlobalExists(lua_State * L, string name);
 			static bool FieldExists(lua_State * L, string name);
 			static int GetField(lua_State * L, string path);

@@ -4,7 +4,7 @@
  *  Created on: 3 Jun 2014
  *      Author: Andrew.squires
  */
-
+/*
 #include <Lua.hpp>
 #include <string>
 #include <LuaUtility.h>
@@ -36,3 +36,4 @@ NewGameDetail::NewGameDetail(lua_State * L, string path){
 }
 
 
+*/

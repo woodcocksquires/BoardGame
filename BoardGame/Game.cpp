@@ -4,7 +4,7 @@
  *  Created on: 25 Apr 2014
  *      Author: Andy
  */
-
+/*
 #include <Game.h>
 
 namespace Wsq {
@@ -20,5 +20,6 @@ namespace Wsq {
 		return "Test this!";
 	}
 
-	} /* namespace BoardGame */
-} /* namespace Wsq */
+//	}  namespace BoardGame */
+//} /* namespace Wsq */
+

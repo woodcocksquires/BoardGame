@@ -4,7 +4,7 @@
  *  Created on: 19 May 2014
  *      Author: andrew.squires
  */
-
+/*
 #include <BoardLocation.h>
 #include <IBoardState.h>
 
@@ -31,4 +31,4 @@ bool BoardLocation::SetPiece(IBoardPiece * piece){
 int BoardLocation::GetValue() { return _value; }
 
 
-
+*/

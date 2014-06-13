@@ -1,4 +1,4 @@
-#ifndef IGAMEDETAIL_H_
+/*#ifndef IGAMEDETAIL_H_
 #define IGAMEDETAIL_H_
 
 #include<string>

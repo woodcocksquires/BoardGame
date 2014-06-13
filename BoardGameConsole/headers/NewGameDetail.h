@@ -4,7 +4,7 @@
  *  Created on: 3 Jun 2014
  *      Author: Andrew.squires
  */
-
+/*
 #ifndef NEWGAMEDETAIL_H_
 #define NEWGAMEDETAIL_H_
 

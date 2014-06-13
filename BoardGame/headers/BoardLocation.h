@@ -4,7 +4,7 @@
  *  Created on: 19 May 2014
  *      Author: andrew.squires
  */
-
+/*
 #ifndef BOARDLOCATION_H_
 #define BOARDLOCATION_H_
 
