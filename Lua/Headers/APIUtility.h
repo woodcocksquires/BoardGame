@@ -40,6 +40,8 @@ namespace Wsq {
 			static APIUtility * _APIUtility;
 
 			lua_State * _luaState;
+			bool GetTable(string name);
+			int GetTablePath(string path);
 
 			APIUtility();
 			~APIUtility();
@@ -47,6 +49,7 @@ namespace Wsq {
 			static APIUtility * GetUtility();
 
 			int LoadAndExecuteFile(string path);
+			int GetField(string path);
 			bool GlobalExists(string name);
 			bool FieldExists(string name);
 
@@ -60,6 +63,24 @@ namespace Wsq {
 			void SetGlobal(string name, EmptyTable value, bool keepOnStack);
 			void SetGlobal(string name, int value);
 			void SetGlobal(string name, int value, bool keepOnStack);
+
+			void SetField(string name, bool value);
+			void SetField(string name, int value);
+			void SetField(string name, double value);
+			void SetField(string name, char * value);
+			void SetField(string name, string value);
+			void SetField(string name, EmptyTable value);
+			void SetField(string name, bool value, bool keepOnStack);
+			void SetField(string name, int value, bool keepOnStack);
+			void SetField(string name, double value, bool keepOnStack);
+			void SetField(string name, char * value, bool keepOnStack);
+			void SetField(string name, string value, bool keepOnStack);
+			void SetField(string name, EmptyTable value, bool keepOnStack);
+
+			bool FieldToBool(string path);
+			int FieldToInt(string path);
+			double FieldToDouble(string path);
+			string FieldToString(string path);
 		};
 	}
 }
