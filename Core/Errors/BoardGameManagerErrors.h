@@ -20,6 +20,18 @@ namespace Wsq {
 					return "There was a problem setting the BoardGameLoader.";
 				}
 			};
+
+			class LoadGamesException: public exception{
+				virtual const char * what() const throw(){
+					return "Error occurred loading games.";
+				}
+			};
+
+			class IncorrectConfigurationException: public exception{
+				virtual const char * what() const throw(){
+					return "BoardGameManager properties not configured correctly.";
+				}
+			};
 		}
 	}
 }

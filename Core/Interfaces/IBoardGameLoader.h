@@ -8,12 +8,18 @@
 #ifndef IBOARDGAMELOADER_H_
 #define IBOARDGAMELOADER_H_
 
+#include<vector>
+
+#include<IBoardGameDetails.h>
+
+using namespace std;
+
 namespace Wsq {
 	namespace BoardGame {
 		class IBoardGameLoader {
 		public:
-			IBoardGameLoader(){}
 			virtual ~IBoardGameLoader(){}
+			virtual vector<IBoardGameDetails *> * LoadGames() = 0;
 		};
 	}
 }

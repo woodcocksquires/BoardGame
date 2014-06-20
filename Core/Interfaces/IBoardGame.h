@@ -12,7 +12,6 @@ namespace Wsq {
 	namespace BoardGame {
 		class IBoardGame {
 		  public:
-			IBoardGame() {}
 			virtual ~IBoardGame() {}
 		};
 	}

@@ -18,12 +18,16 @@ namespace Wsq {
 	namespace BoardGame {
 		class BoardGameManager final {
 		  private:
-			IBoardGameLoader * _boardGameLoader = nullptr;
-			vector<IBoardGameDetails *> * _boardGameDetails = new vector<IBoardGameDetails *>();
+			IBoardGameLoader * _boardGameLoader;
+			vector<IBoardGameDetails *> * _boardGames;
+
+			bool configurationIsValid();
 
 		  public:
 			BoardGameManager();
 			~BoardGameManager();
+
+			bool LoadGames();
 
 			IBoardGameLoader * BoardGameLoader();
 			void BoardGameLoader(IBoardGameLoader * loader);

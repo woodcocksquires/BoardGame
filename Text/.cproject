@@ -107,6 +107,7 @@
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
+								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output.798442700" outputPrefix="Wsq." superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output"/>
 							</tool>
 						</toolChain>
 					</folderInfo>

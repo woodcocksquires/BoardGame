@@ -52,6 +52,7 @@
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
+								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug.output.1136888154" outputPrefix="Wsq." superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug.output"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -110,6 +111,7 @@
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
+								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output.611968706" outputPrefix="Wsq." superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -137,4 +139,5 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope"/>
 </cproject>
