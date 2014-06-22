@@ -65,6 +65,7 @@ int main(){
 */
 
 
+#include<BoardGameDetailsFactory.h>
 #include<BoardGameManager.h>
 #include<Utility.h>
 
@@ -72,6 +73,6 @@ using namespace Wsq::BoardGame;
 using namespace Wsq::BoardGame::Default;
 
 int main() {
-	BoardGameManager * manager = new Utility::MakeDefaultBoardGameManager();
+	BoardGameManager * manager = Utility::MakeDefaultBoardGameManager();
 	manager->LoadBoardGames();
 }
