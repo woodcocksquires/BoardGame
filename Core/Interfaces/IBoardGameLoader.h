@@ -11,19 +11,19 @@
 #include<vector>
 
 #include<IBoardGameDetails.h>
+#include<IBoardGameDetailsFactory.h>
 
 using namespace std;
 
 namespace Wsq {
 	namespace BoardGame {
 		class IBoardGameLoader {
-		public:
+		  public:
+			IBoardGameLoader(){}
 			virtual ~IBoardGameLoader(){}
-			virtual vector<IBoardGameDetails *> * LoadGames() = 0;
+			virtual vector<IBoardGameDetails *> * LoadGamesDetails(IBoardGameDetailsFactory * detailsFactory) = 0;
 		};
 	}
 }
-
-
 
 #endif /* IBOARDGAMELOADER_H_ */

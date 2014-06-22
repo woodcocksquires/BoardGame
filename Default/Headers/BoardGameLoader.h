@@ -9,9 +9,11 @@
 #define BOARDGAMELOADER_H_
 
 #include<vector>
+#include<string>
 
 #include<IBoardGameLoader.h>
 #include<IBoardGameDetails.h>
+#include<IBoardGameDetailsFactory.h>
 
 using namespace std;
 
@@ -19,11 +21,16 @@ namespace Wsq {
 	namespace BoardGame {
 		namespace Default {
 			class BoardGameLoader : public IBoardGameLoader {
+			  private:
+				const string BASEPATH = "scripts";
+				string _gamePath;
+
+				IBoardGameDetails * LoadGameDetails(string path);
 			  public:
-				BoardGameLoader(){}
+				BoardGameLoader();
 				virtual ~BoardGameLoader(){}
 
-				virtual vector<IBoardGameDetails *> * LoadGames();
+				virtual vector<IBoardGameDetails *> * LoadGamesDetails(IBoardGameDetailsFactory * detailsFactory);
 			};
 		}
 	}

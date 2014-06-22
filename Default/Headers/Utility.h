@@ -10,7 +10,7 @@
 
 #include<BoardGameManager.h>
 
-using Wsq::BoardGame;
+using namespace Wsq::BoardGame;
 
 namespace Wsq {
 	namespace BoardGame {

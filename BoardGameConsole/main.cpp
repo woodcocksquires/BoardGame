@@ -64,6 +64,14 @@ int main(){
 }
 */
 
-int main() {
 
+#include<BoardGameManager.h>
+#include<Utility.h>
+
+using namespace Wsq::BoardGame;
+using namespace Wsq::BoardGame::Default;
+
+int main() {
+	BoardGameManager * manager = new Utility::MakeDefaultBoardGameManager();
+	manager->LoadBoardGames();
 }

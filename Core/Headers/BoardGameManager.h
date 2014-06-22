@@ -10,6 +10,7 @@
 
 #include<vector>
 #include<IBoardGameLoader.h>
+#include<IBoardGameDetailsFactory.h>
 #include<IBoardGameDetails.h>
 
 using namespace std;
@@ -19,6 +20,7 @@ namespace Wsq {
 		class BoardGameManager final {
 		  private:
 			IBoardGameLoader * _boardGameLoader;
+			IBoardGameDetailsFactory * _boardGameDetailsFactory;
 			vector<IBoardGameDetails *> * _boardGames;
 
 			bool configurationIsValid();
@@ -27,10 +29,12 @@ namespace Wsq {
 			BoardGameManager();
 			~BoardGameManager();
 
-			bool LoadGames();
+			void LoadBoardGames();
 
 			IBoardGameLoader * BoardGameLoader();
 			void BoardGameLoader(IBoardGameLoader * loader);
+			IBoardGameDetailsFactory * BoardGameDetailsFactory();
+			void BoardGameDetailsFactory(IBoardGameDetailsFactory * detailsFactory);
 		};
 	}
 }

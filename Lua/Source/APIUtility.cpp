@@ -272,3 +272,7 @@ int APIUtility::GetTablePath(string path){
 int APIUtility::GetField(string path){
 	return GetTablePath(path);
 }
+
+void APIUtility::Pop(int depth){
+	lua_pop(_luaState, depth);
+}

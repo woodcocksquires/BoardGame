@@ -5,9 +5,10 @@
  *      Author: Andrew.squires
  */
 
-
+#include<IBoardGameLoader.h>
 #include<BoardGameManager.h>
 #include<BoardGameLoader.h>
+#include<BoardGameDetailsFactory.h>
 #include<Utility.h>
 
 using namespace Wsq::BoardGame;
@@ -16,10 +17,6 @@ using namespace Wsq::BoardGame::Default;
 BoardGameManager * Utility::MakeDefaultBoardGameManager(){
 	BoardGameManager * manager = new BoardGameManager();
 	manager->BoardGameLoader(new BoardGameLoader());
-
+	manager->BoardGameDetailsFactory(new BoardGameDetailsFactory());
 	return manager;
 }
-
-
-
-

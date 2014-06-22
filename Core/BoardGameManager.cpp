@@ -10,10 +10,24 @@
 #include<IBoardGameLoader.h>
 #include<BoardGameManager.h>
 #include<BoardGameManagerErrors.h>
-#include<BoardGameLoader.h>
 
 using namespace std;
 using namespace Wsq::BoardGame;
+
+BoardGameManager::BoardGameManager(){
+	_boardGameLoader = nullptr;
+	_boardGameDetailsFactory = nullptr;
+	_boardGames = nullptr;
+}
+
+BoardGameManager::~BoardGameManager(){
+	delete _boardGameLoader;
+	delete _boardGameDetailsFactory;
+	for(unsigned g = 0; g < _boardGames->size(); g++){
+		delete _boardGames->at(g);
+	}
+	delete _boardGames;
+}
 
 IBoardGameLoader * BoardGameManager::BoardGameLoader(){
 	return _boardGameLoader;
@@ -33,18 +47,38 @@ void BoardGameManager::BoardGameLoader(IBoardGameLoader * loader){
 }
 
 
+IBoardGameDetailsFactory * BoardGameManager::BoardGameDetailsFactory(){
+	return _boardGameDetailsFactory;
+}
+
+void BoardGameManager::BoardGameDetailsFactory(IBoardGameDetailsFactory * detailsFactory){
+	if(_boardGameDetailsFactory != nullptr){
+		try {
+			delete _boardGameDetailsFactory;
+		}
+		catch(...){
+			throw Errors::SetBoardGameDetailsFactoryException();
+		}
+	}
+
+	_boardGameDetailsFactory = detailsFactory;
+}
+
 /* ### Private methods ### */
 
 bool BoardGameManager::configurationIsValid(){
-	if(_boardGameLoader == nullptr){
+	if(_boardGameLoader == nullptr
+		|| _boardGameDetailsFactory == nullptr){
 		return false;
 	}
+
+	return true;
 }
 
 
 /* ### Public methods ### */
 
-bool BoardGameManager::LoadGames(){
+void BoardGameManager::LoadBoardGames(){
 	if(!configurationIsValid()){
 		throw Errors::IncorrectConfigurationException();
 	}
@@ -61,6 +95,6 @@ bool BoardGameManager::LoadGames(){
 		}
 	}
 
-	_boardGames = _boardGameLoader->LoadGames();
+	_boardGames = _boardGameLoader->LoadGamesDetails(_boardGameDetailsFactory);
 }
 

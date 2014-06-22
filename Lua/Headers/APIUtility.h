@@ -81,6 +81,8 @@ namespace Wsq {
 			int FieldToInt(string path);
 			double FieldToDouble(string path);
 			string FieldToString(string path);
+
+			void Pop(int depth);
 		};
 	}
 }

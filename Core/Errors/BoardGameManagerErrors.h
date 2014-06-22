@@ -32,6 +32,12 @@ namespace Wsq {
 					return "BoardGameManager properties not configured correctly.";
 				}
 			};
+
+			class SetBoardGameDetailsFactoryException: public exception{
+				virtual const char * what() const throw(){
+					return "Error occured setting BoardGameDetailsFactory.";
+				}
+			};
 		}
 	}
 }
