@@ -29,6 +29,10 @@ BoardGameManager::~BoardGameManager(){
 	delete _boardGames;
 }
 
+vector<IBoardGameDetails *> * BoardGameManager::BoardGames(){
+	return _boardGames;
+}
+
 IBoardGameLoader * BoardGameManager::BoardGameLoader(){
 	return _boardGameLoader;
 }

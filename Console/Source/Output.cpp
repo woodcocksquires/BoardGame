@@ -7,7 +7,7 @@
 
 #include<iostream>
 #include<string>
-#include <cstdlib>
+#include<cstdlib>
 #include<output.h>
 
 using namespace std;

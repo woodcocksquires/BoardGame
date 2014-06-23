@@ -15,6 +15,7 @@ using namespace std;
 namespace Wsq {
 	namespace Console {
 		class Output {
+		  public:
 			static void WriteLine();
 			static void WriteLine(int lines);
 			static void WriteLine(string output);

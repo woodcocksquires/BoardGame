@@ -29,6 +29,8 @@ namespace Wsq {
 			BoardGameManager();
 			~BoardGameManager();
 
+			vector<IBoardGameDetails *> * BoardGames();
+
 			void LoadBoardGames();
 
 			IBoardGameLoader * BoardGameLoader();

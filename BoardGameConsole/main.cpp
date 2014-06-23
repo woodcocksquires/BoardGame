@@ -67,12 +67,20 @@ int main(){
 
 #include<BoardGameDetailsFactory.h>
 #include<BoardGameManager.h>
-#include<Utility.h>
+#include<Output.h>
+#include<DefaultUtility.h>
 
 using namespace Wsq::BoardGame;
+using namespace Wsq::Console;
 using namespace Wsq::BoardGame::Default;
 
 int main() {
-	BoardGameManager * manager = Utility::MakeDefaultBoardGameManager();
+	Output::WriteLine("Welcome to Woodcock Squires Game Console");
+	BoardGameManager * manager = DefaultUtility::MakeDefaultBoardGameManager();
 	manager->LoadBoardGames();
+
+	for(unsigned g=0; g<manager->BoardGames()->size(); g++){
+		Output::WriteLine(g+1, manager->BoardGames()->at(g)->Name());
+	}
+
 }
