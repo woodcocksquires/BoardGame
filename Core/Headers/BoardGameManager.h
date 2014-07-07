@@ -9,6 +9,7 @@
 #define BOARDGAMEMANAGER_H_
 
 #include<vector>
+#include<IBoardGame.h>
 #include<IBoardGameLoader.h>
 #include<IBoardGameDetailsFactory.h>
 #include<IBoardGameDetails.h>
@@ -32,6 +33,7 @@ namespace Wsq {
 			vector<IBoardGameDetails *> * BoardGames();
 
 			void LoadBoardGames();
+			IBoardGame * StartGame(IBoardGameDetails * details);
 
 			IBoardGameLoader * BoardGameLoader();
 			void BoardGameLoader(IBoardGameLoader * loader);

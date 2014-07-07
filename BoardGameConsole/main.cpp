@@ -83,4 +83,7 @@ int main() {
 		Output::WriteLine(g+1, manager->BoardGames()->at(g)->Name());
 	}
 
+	Output::WriteLine();
+	Output::GetNumericOption("Please choose a game from the options available", manager->BoardGames()->size());
+
 }

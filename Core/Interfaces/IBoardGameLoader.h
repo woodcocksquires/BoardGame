@@ -22,6 +22,7 @@ namespace Wsq {
 			IBoardGameLoader(){}
 			virtual ~IBoardGameLoader(){}
 			virtual vector<IBoardGameDetails *> * LoadGamesDetails(IBoardGameDetailsFactory * detailsFactory) = 0;
+			virtual IBoardGame * StartBoardGame(IBoardGameDetails * details) = 0;
 		};
 	}
 }
